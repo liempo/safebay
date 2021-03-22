@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "409885034770",
+    "project_id": "lspu-contact-tracing",
+    "storage_bucket": "lspu-contact-tracing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409885034770:android:d619d5bc5dd41cb92ccbcb",
+        "android_client_info": {
+          "package_name": "wtf.liempo.safebay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409885034770-loro4c5gmk49f860fvvpaipbrto4114g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt9dpKLsXSR5EI19BCIR-22yzmpM20_c0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409885034770-loro4c5gmk49f860fvvpaipbrto4114g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
