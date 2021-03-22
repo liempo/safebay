@@ -1,10 +1,14 @@
-package wtf.liempo.safebay
+package wtf.liempo.safebay.auth.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.firebase.ui.auth.AuthUI
+import wtf.liempo.safebay.R
 
 class AuthActivity : AppCompatActivity() {
+
+    private val vm: AuthViewModel by viewModels()
 
     private val provider by lazy {
         AuthUI.IdpConfig.PhoneBuilder()
