@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import wtf.liempo.safebay.R
 
-class StartFragment : Fragment() {
+class AuthStartFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
