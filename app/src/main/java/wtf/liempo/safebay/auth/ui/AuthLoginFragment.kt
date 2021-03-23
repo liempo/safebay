@@ -29,7 +29,7 @@ class AuthLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSignIn.setOnClickListener {
+        binding.buttonStandardSignIn.setOnClickListener {
             vm.startAuth(requireActivity(), Type.STANDARD)
         }
 

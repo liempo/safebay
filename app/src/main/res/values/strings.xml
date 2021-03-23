@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Safebay</string>
-    <string name="action_sign_in_normal">Sign In</string>
-    <string name="action_sign_in_business">Sign In as Business</string>
+    <string name="action_standard_sign_in">Sign In</string>
+    <string name="action_business_sign_in">Sign In as Business</string>
 </resources>
