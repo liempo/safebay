@@ -3,35 +3,37 @@ package wtf.liempo.safebay.auth.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.firebase.ui.auth.AuthUI
+import androidx.navigation.findNavController
+import timber.log.Timber
 import wtf.liempo.safebay.R
+import wtf.liempo.safebay.auth.model.Phase
+import wtf.liempo.safebay.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
 
     private val vm: AuthViewModel by viewModels()
-
-    private val provider by lazy {
-        AuthUI.IdpConfig.PhoneBuilder()
-                .setWhitelistedCountries(listOf("PH"))
-                .build()
-    }
-
-    private val auth by lazy {
-        AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(listOf(provider))
-                .setDefaultProvider(provider)
-                .setTheme(R.style.Theme_Safebay)
-                .setLogo(R.drawable.banner_app)
-                .build()
-    }
+    private lateinit var binding: ActivityAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
-    }
+        Timber.plant(Timber.DebugTree())
 
-    companion object {
-        private const val RC_AUTH = 42069
+        // Set up view binding
+        binding = ActivityAuthBinding
+            .inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Get navController first
+        val controller = binding.root.findNavController()
+
+        // Set up the view model
+        vm.phase.observe(this, {
+            when (it) {
+                Phase.LOGIN -> controller.navigate(R.id.action_start_to_login)
+                Phase.PROFILE -> Timber.d("TODO: State Profile")
+                Phase.FINISH -> Timber.d("TODO: State Finish")
+                else -> Timber.w("Phase should not be null")
+            }
+        })
     }
 }
