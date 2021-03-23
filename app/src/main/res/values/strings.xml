@@ -2,4 +2,7 @@
     <string name="app_name">Safebay</string>
     <string name="action_standard_sign_in">Sign In</string>
     <string name="action_business_sign_in">Sign In as Business</string>
+    <string name="msg_input_name">Enter your full name</string>
+    <string name="msg_input_address">Enter your home address</string>
+    <string name="action_sign_up">Finish</string>
 </resources>
