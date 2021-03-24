@@ -33,7 +33,7 @@ class AuthViewModel : ViewModel() {
     private fun startPhaseCheck() {
         viewModelScope.launch {
             _phase.value =
-                if (repo.getCurrentUserId().isNullOrEmpty()) {
+                if (!repo.getCurrentUserId().isNullOrEmpty()) {
                     if (repo.getCurrentProfile() != null)
                         Phase.FINISH
                     else Phase.PROFILE
