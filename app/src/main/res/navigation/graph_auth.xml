@@ -4,16 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph_auth"
     app:startDestination="@id/start">
+
     <fragment
         android:id="@+id/start"
         android:name="wtf.liempo.safebay.auth.ui.AuthStartFragment"
-        android:label="StartFragment" >
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_auth_start">
         <action
             android:id="@+id/action_start_to_login"
             app:destination="@id/login" />
+        <action
+            android:id="@+id/action_start_to_profile"
+            app:destination="@id/profile" />
     </fragment>
+
     <fragment
         android:id="@+id/login"
         android:name="wtf.liempo.safebay.auth.ui.AuthLoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_auth_login">
+        <action
+            android:id="@+id/action_login_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="wtf.liempo.safebay.auth.ui.AuthProfileFragment"
+        android:label="AuthProfileFragment"
+        tools:layout="@layout/fragment_auth_profile" />
+
 </navigation>

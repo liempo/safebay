@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import wtf.liempo.safebay.databinding.FragmentAuthStartBinding
+import wtf.liempo.safebay.databinding.FragmentAuthProfileBinding
 
-class AuthStartFragment : Fragment() {
+class AuthProfileFragment : Fragment() {
 
     private val vm: AuthViewModel by activityViewModels()
-    private var _binding: FragmentAuthStartBinding? = null
+    private var _binding: FragmentAuthProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,9 +19,8 @@ class AuthStartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAuthStartBinding.inflate(
+        _binding = FragmentAuthProfileBinding.inflate(
             inflater, container, false)
         return binding.root
     }
-
 }
