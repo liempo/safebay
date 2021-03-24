@@ -6,6 +6,8 @@
     <!-- ProfileView -->
     <string name="title_details">Details</string>
     <string name="msg_input_name">Name</string>
+    <string name="msg_input_pic">Profile Picture</string>
+
     <string name="title_address">Address</string>
     <string name="msg_input_address_line_1">House Number / Unit / Building</string>
     <string name="msg_input_address_line_2">Street / Subdivision</string>
@@ -14,5 +16,4 @@
     <string name="msg_input_city">City</string>
 
     <string name="action_sign_up">Finish</string>
-
 </resources>
