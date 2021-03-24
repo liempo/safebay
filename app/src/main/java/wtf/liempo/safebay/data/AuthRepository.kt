@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.data
+package wtf.liempo.safebay.data
 
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.ktx.auth

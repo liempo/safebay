@@ -12,7 +12,7 @@ import com.firebase.ui.auth.IdpResponse
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.auth.data.AuthRepository
+import wtf.liempo.safebay.data.AuthRepository
 import wtf.liempo.safebay.auth.model.Phase
 import wtf.liempo.safebay.auth.model.Type
 
