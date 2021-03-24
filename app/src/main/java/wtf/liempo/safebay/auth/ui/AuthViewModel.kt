@@ -51,6 +51,8 @@ class AuthViewModel : ViewModel() {
     }
 
     fun startProfileCreate(profile: Profile) {
+        _phase.value = Phase.LOADING
+
         viewModelScope.launch {
             _phase.value =
                 if (repo.setCurrentProfile(profile))
