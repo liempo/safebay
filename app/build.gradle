@@ -61,4 +61,5 @@ dependencies {
 
     // Third party open source library (for attribution)
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 }

@@ -3,13 +3,16 @@
     <string name="action_standard_sign_in">Sign In</string>
     <string name="action_business_sign_in">Sign In as Business</string>
 
-    <string name="title_address">Address</string>
+    <!-- ProfileView -->
+    <string name="title_details">Details</string>
     <string name="msg_input_name">Name</string>
+    <string name="title_address">Address</string>
     <string name="msg_input_address_line_1">House Number / Unit / Building</string>
     <string name="msg_input_address_line_2">Street / Subdivision</string>
     <string name="msg_input_brgy">Baranggay</string>
-
-    <string name="action_sign_up">Finish</string>
     <string name="msg_input_province">Province</string>
     <string name="msg_input_city">City</string>
+
+    <string name="action_sign_up">Finish</string>
+
 </resources>
