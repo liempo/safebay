@@ -12,13 +12,13 @@ import com.firebase.ui.auth.IdpResponse
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.data.AuthRepository
+import wtf.liempo.safebay.data.ProfileRepository
 import wtf.liempo.safebay.auth.model.Phase
 import wtf.liempo.safebay.auth.model.Type
 
 class AuthViewModel : ViewModel() {
 
-    private val repo = AuthRepository()
+    private val repo = ProfileRepository()
 
     // Determines the state of the authentication
     private val _phase = MutableLiveData<Phase>()

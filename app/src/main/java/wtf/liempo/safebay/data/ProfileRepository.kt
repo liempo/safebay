@@ -8,7 +8,10 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import wtf.liempo.safebay.common.models.Profile
 
-class AuthRepository {
+class ProfileRepository {
+
+    private val profiles = Firebase.firestore
+        .collection("profile")
 
     fun getCurrentUserId(): String? =
         Firebase.auth.currentUser?.uid
@@ -17,8 +20,7 @@ class AuthRepository {
         val uid = getCurrentUserId() ?: return null
 
         return try {
-            Firebase.firestore
-                .collection("profile")
+            profiles
                 .document(uid)
                 .get()
                 .await()
@@ -30,8 +32,7 @@ class AuthRepository {
         val uid = getCurrentUserId() ?: return false
 
         return try {
-            Firebase.firestore
-                .collection("profile")
+            profiles
                 .document(uid)
                 .set(update)
                 .await()
