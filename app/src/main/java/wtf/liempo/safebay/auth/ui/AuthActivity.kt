@@ -34,9 +34,8 @@ class AuthActivity : AppCompatActivity() {
         // Set up the view model
         vm.phase.observe(this, {
             val actionId = when (it) {
-                Phase.LOGIN -> R.id.action_start_to_login
-                Phase.PROFILE -> R.id.action_start_to_login
-                Phase.FINISH -> R.id.action_start_to_login
+                Phase.LOGIN -> R.id.to_login
+                Phase.PROFILE -> R.id.to_profile
                 else -> return@observe
             }; controller.navigate(actionId)
         })
