@@ -1,5 +1,6 @@
 package wtf.liempo.safebay.auth.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
+import timber.log.Timber
+import wtf.liempo.safebay.R
 import wtf.liempo.safebay.auth.model.Type
 import wtf.liempo.safebay.databinding.FragmentAuthLoginBinding
 
@@ -29,13 +34,28 @@ class AuthLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonStandardSignIn.setOnClickListener {
-            vm.startAuth(requireActivity(), Type.STANDARD)
-        }
+        binding.buttonStandardSignIn
+            .setOnClickListener { startAuthUI(Type.STANDARD) }
+        binding.buttonBusinessSignIn
+            .setOnClickListener { startAuthUI(Type.BUSINESS) }
+    }
 
-        binding.buttonBusinessSignIn.setOnClickListener {
-            vm.startAuth(requireActivity(), Type.BUSINESS)
-        }
+    private fun startAuthUI(startAsType: Type) {
+        val provider = AuthUI.IdpConfig.PhoneBuilder()
+            .setWhitelistedCountries(listOf("PH"))
+            .build()
+
+        val intent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(listOf(provider))
+            .setDefaultProvider(provider)
+            .setIsSmartLockEnabled(false)
+            .setTheme(R.style.Theme_Safebay)
+            .setLogo(R.drawable.banner_app)
+            .build()
+
+        vm.setAuthType(startAsType)
+        startActivityForResult(intent, RC_AUTH)
     }
 
     override fun onActivityResult(
@@ -45,8 +65,17 @@ class AuthLoginFragment : Fragment() {
     ) {
         super.onActivityResult(
             requestCode, resultCode, data)
-        vm.onAuthResult(
-            requestCode, resultCode, data)
+
+        if (requestCode != RC_AUTH)
+            return
+        val response = IdpResponse
+            .fromResultIntent(data)
+        if (resultCode == Activity.RESULT_OK)
+            vm.startProfileCheck()
+        else Timber.e(response?.error)
     }
 
+    companion object {
+        private const val RC_AUTH = 42069
+    }
 }

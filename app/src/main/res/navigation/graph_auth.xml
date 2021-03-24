@@ -28,5 +28,8 @@
     <action
         android:id="@+id/to_profile"
         app:destination="@id/profile" />
+    <action
+        android:id="@+id/to_start"
+        app:destination="@id/start" />
 
 </navigation>

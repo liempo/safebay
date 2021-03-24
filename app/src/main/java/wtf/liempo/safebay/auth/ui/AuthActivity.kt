@@ -31,11 +31,15 @@ class AuthActivity : AppCompatActivity() {
                 as NavHostFragment)
             .navController
 
+        // Start the authentication flow
+        vm.startPhaseCheck()
+
         // Set up the view model
         vm.phase.observe(this, {
             Timber.d("Phase: $it")
 
             val actionId = when (it) {
+                Phase.LOADING -> R.id.to_start
                 Phase.LOGIN -> R.id.to_login
                 Phase.PROFILE -> R.id.to_profile
                 else -> return@observe
