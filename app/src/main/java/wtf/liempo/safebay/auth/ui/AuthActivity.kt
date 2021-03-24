@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.auth.model.Phase
@@ -26,8 +26,10 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Get navController first
-        controller = binding.root
-            .findNavController()
+        controller = (supportFragmentManager
+            .findFragmentById(R.id.container)
+                as NavHostFragment)
+            .navController
 
         // Set up the view model
         vm.phase.observe(this, {
