@@ -23,4 +23,14 @@ class AuthProfileFragment : Fragment() {
             inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonSignUp.setOnClickListener {
+            val profile = binding.profile.toProfile() ?:
+                return@setOnClickListener
+            vm.startProfileCreate(profile)
+        }
+    }
 }

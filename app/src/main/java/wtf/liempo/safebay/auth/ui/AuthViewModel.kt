@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import wtf.liempo.safebay.auth.model.Phase
 import wtf.liempo.safebay.auth.model.Type
+import wtf.liempo.safebay.common.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 
 class AuthViewModel : ViewModel() {
@@ -44,6 +45,15 @@ class AuthViewModel : ViewModel() {
         viewModelScope.launch {
             _phase.value =
                 if (repo.getCurrentProfile() != null)
+                    Phase.FINISH
+                else Phase.PROFILE
+        }
+    }
+
+    fun startProfileCreate(profile: Profile) {
+        viewModelScope.launch {
+            _phase.value =
+                if (repo.setCurrentProfile(profile))
                     Phase.FINISH
                 else Phase.PROFILE
         }

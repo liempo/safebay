@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.textfield.TextInputEditText
+import wtf.liempo.safebay.common.models.Address
+import wtf.liempo.safebay.common.models.Profile
 import wtf.liempo.safebay.databinding.ViewProfileBinding
-
 
 class ProfileView : ConstraintLayout {
 
@@ -38,4 +40,36 @@ class ProfileView : ConstraintLayout {
             this, true)
     }
 
+    fun toProfile(): Profile? {
+        // TODO Implement profile picture upload
+
+        return try {
+            val name = binding.inputName.getInput(true)
+            val address = Address(
+                binding.inputAddressLine1.getInput(true),
+                binding.inputAddressLine2.getInput(),
+                binding.inputBrgy.getInput(true),
+                binding.inputCity.getInput(true),
+                binding.inputProvince.getInput(true))
+
+            Profile(name, null, address)
+        } catch (e: RequiredFieldEmptyException) { null }
+    }
+
+    companion object {
+        fun TextInputEditText.getInput(
+            required: Boolean = false
+        ): String {
+            val input = text.toString().trim()
+
+            if (input.isEmpty() && required) {
+                error = "This field is required"
+                throw RequiredFieldEmptyException()
+            }
+
+            return input
+        }
+    }
+
+    class RequiredFieldEmptyException : Exception()
 }
