@@ -24,12 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_qr_code_scanner_24"
-        app:tint="?colorOnPrimary"
+        app:backgroundTint="?colorPrimary"
         app:layout_anchor="@id/bar"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        style="@style/Theme.Safebay.BottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:theme="@style/Theme.Safebay.BottomAppBar"
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,8 +14,9 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Safebay.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
-        <item name="colorControlNormal">@color/primary_dark</item>
+    <style name="Theme.Safebay.BottomAppBar"
+        parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
 </resources>
