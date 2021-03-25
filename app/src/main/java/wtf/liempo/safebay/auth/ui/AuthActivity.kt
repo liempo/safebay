@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.auth.model.Phase
+import wtf.liempo.safebay.auth.model.Type
 import wtf.liempo.safebay.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
@@ -41,7 +42,11 @@ class AuthActivity : AppCompatActivity() {
             val actionId = when (it) {
                 Phase.LOGIN -> R.id.to_login
                 Phase.PROFILE -> R.id.to_profile
-                Phase.FINISH ->  R.id.to_home
+                Phase.FINISH ->  when (vm.type) {
+                    Type.STANDARD -> R.id.to_home_standard
+                    Type.BUSINESS -> R.id.to_home_standard
+                }
+
                 else -> return@observe
             }; controller.navigate(actionId)
         })

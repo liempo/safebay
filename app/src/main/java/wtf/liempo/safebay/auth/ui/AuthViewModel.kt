@@ -19,12 +19,7 @@ class AuthViewModel : ViewModel() {
     val phase: LiveData<Phase> = _phase
 
     // Determines the type of the signed in user
-    private val _type = MutableLiveData<Type>()
-    val type: LiveData<Type> = _type
-
-    fun setAuthType(type: Type) {
-        _type.value = type
-    }
+    lateinit var type: Type
 
     fun startPhaseCheck() {
         viewModelScope.launch {

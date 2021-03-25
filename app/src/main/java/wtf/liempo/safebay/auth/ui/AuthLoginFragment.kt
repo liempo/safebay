@@ -54,7 +54,7 @@ class AuthLoginFragment : Fragment() {
             .setLogo(R.drawable.banner_app)
             .build()
 
-        vm.setAuthType(startAsType)
+        vm.type = startAsType
         startActivityForResult(intent, RC_AUTH)
     }
 
