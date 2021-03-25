@@ -17,27 +17,39 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_auth_login"/>
 
-    <fragment
-        android:id="@+id/profile"
-        android:name="wtf.liempo.safebay.auth.ui.AuthProfileFragment"
-        android:label="AuthProfileFragment"
-        tools:layout="@layout/fragment_auth_profile" />
-    <action
-        android:id="@+id/to_login"
-        app:destination="@id/login" />
-    <action
-        android:id="@+id/to_profile"
-        app:destination="@id/profile" />
-    <action
-        android:id="@+id/to_start"
-        app:destination="@id/start" />
     <activity
         android:id="@+id/home"
         android:name="wtf.liempo.safebay.home.ui.HomeActivity"
         android:label="HomeActivity"
         tools:layout="@layout/activity_home" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="wtf.liempo.safebay.auth.ui.AuthProfileFragment"
+        android:label="AuthProfileFragment"
+        tools:layout="@layout/fragment_auth_profile" />
+
+    <action
+        android:id="@+id/to_login"
+        app:destination="@id/login"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/graph_auth"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/to_profile"
+        app:destination="@id/profile"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/graph_auth"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/to_start"
+        app:destination="@id/start"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/graph_auth"
+        app:popUpToInclusive="true" />
     <action
         android:id="@+id/to_home"
-        app:destination="@id/home" />
+        app:destination="@id/home"
+        app:launchSingleTop="true" />
 
 </navigation>

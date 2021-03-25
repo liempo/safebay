@@ -39,7 +39,6 @@ class AuthActivity : AppCompatActivity() {
             Timber.d("Phase: $it")
 
             val actionId = when (it) {
-                Phase.LOADING -> R.id.to_start
                 Phase.LOGIN -> R.id.to_login
                 Phase.PROFILE -> R.id.to_profile
                 Phase.FINISH ->  R.id.to_home

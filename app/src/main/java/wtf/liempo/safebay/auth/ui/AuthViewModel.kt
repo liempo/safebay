@@ -27,8 +27,6 @@ class AuthViewModel : ViewModel() {
     }
 
     fun startPhaseCheck() {
-        _phase.value = Phase.LOADING
-
         viewModelScope.launch {
             _phase.value =
                 if (!repo.getCurrentUserId().isNullOrEmpty()) {
@@ -40,8 +38,6 @@ class AuthViewModel : ViewModel() {
     }
 
     fun startProfileCheck() {
-        _phase.value = Phase.LOADING
-
         viewModelScope.launch {
             _phase.value =
                 if (repo.getCurrentProfile() != null)
@@ -51,8 +47,6 @@ class AuthViewModel : ViewModel() {
     }
 
     fun startProfileCreate(profile: Profile) {
-        _phase.value = Phase.LOADING
-
         viewModelScope.launch {
             _phase.value =
                 if (repo.setCurrentProfile(profile))
