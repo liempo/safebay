@@ -8,7 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.auth.model.Phase
-import wtf.liempo.safebay.common.models.Type
 import wtf.liempo.safebay.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
