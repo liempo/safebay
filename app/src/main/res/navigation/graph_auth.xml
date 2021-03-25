@@ -31,5 +31,13 @@
     <action
         android:id="@+id/to_start"
         app:destination="@id/start" />
+    <activity
+        android:id="@+id/home"
+        android:name="wtf.liempo.safebay.home.ui.HomeActivity"
+        android:label="HomeActivity"
+        tools:layout="@layout/activity_home" />
+    <action
+        android:id="@+id/to_home"
+        app:destination="@id/home" />
 
 </navigation>
