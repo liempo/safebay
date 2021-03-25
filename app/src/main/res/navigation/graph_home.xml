@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/graph_home">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_home"
+    app:startDestination="@id/cameraFragment">
 
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="wtf.liempo.safebay.home.ui.CameraFragment"
+        android:label="camera_fragment"
+        tools:layout="@layout/camera_fragment" />
 </navigation>
