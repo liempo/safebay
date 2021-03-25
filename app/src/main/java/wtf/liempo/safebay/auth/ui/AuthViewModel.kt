@@ -1,12 +1,14 @@
 package wtf.liempo.safebay.auth.ui
 
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import wtf.liempo.safebay.auth.model.Phase
-import wtf.liempo.safebay.auth.model.Type
+import wtf.liempo.safebay.common.models.Type
 import wtf.liempo.safebay.common.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 
@@ -17,9 +19,6 @@ class AuthViewModel : ViewModel() {
     // Determines the state of the authentication
     private val _phase = MutableLiveData<Phase>()
     val phase: LiveData<Phase> = _phase
-
-    // Determines the type of the signed in user
-    lateinit var type: Type
 
     fun startPhaseCheck() {
         viewModelScope.launch {
@@ -48,6 +47,20 @@ class AuthViewModel : ViewModel() {
                     Phase.FINISH
                 else Phase.PROFILE
         }
+    }
+
+    fun setType(pref: SharedPreferences, type: Type) {
+        pref.edit { putString(PREF_KEY_TYPE, type.toString()) }
+    }
+
+    fun getType(pref: SharedPreferences): Type {
+        val value = pref.getString(PREF_KEY_TYPE, null)
+            ?: return Type.STANDARD
+        return Type.valueOf(value)
+    }
+
+    companion object {
+        private const val PREF_KEY_TYPE = "auth_type"
     }
 
 }

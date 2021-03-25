@@ -22,9 +22,6 @@
         android:name="wtf.liempo.safebay.home.ui.HomeActivity"
         android:label="HomeActivity"
         tools:layout="@layout/activity_home" >
-        <argument
-            android:name="auth_type"
-            app:argType="wtf.liempo.safebay.auth.model.Type" />
     </activity>
 
     <fragment
@@ -53,21 +50,9 @@
         app:popUpToInclusive="true" />
 
     <action
-        android:id="@+id/to_home_standard"
+        android:id="@+id/to_home"
         app:destination="@id/home"
         app:launchSingleTop="true" >
-        <argument
-            android:name="auth_type"
-            android:defaultValue="STANDARD" />
-    </action>
-
-    <action
-        android:id="@+id/to_home_business"
-        app:destination="@id/home"
-        app:launchSingleTop="true" >
-        <argument
-            android:name="auth_type"
-            android:defaultValue="STANDARD" />
     </action>
 
 </navigation>

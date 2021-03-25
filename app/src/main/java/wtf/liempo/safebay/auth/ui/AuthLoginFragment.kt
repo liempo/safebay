@@ -1,6 +1,7 @@
 package wtf.liempo.safebay.auth.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.auth.model.Type
+import wtf.liempo.safebay.common.models.Type
 import wtf.liempo.safebay.databinding.FragmentAuthLoginBinding
 
 class AuthLoginFragment : Fragment() {
@@ -54,7 +55,10 @@ class AuthLoginFragment : Fragment() {
             .setLogo(R.drawable.banner_app)
             .build()
 
-        vm.type = startAsType
+        val pref = requireActivity()
+            .getPreferences(Context.MODE_PRIVATE)
+        vm.setType(pref, startAsType)
+
         startActivityForResult(intent, RC_AUTH)
     }
 

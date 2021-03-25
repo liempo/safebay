@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.model
+package wtf.liempo.safebay.common.models
 
 enum class Type {
     STANDARD,
