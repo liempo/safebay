@@ -19,4 +19,5 @@
 
     <!-- HomeActivity -->
     <string name="title_home">Home</string>
+    <string name="msg_camera_denied">Camera permission not granted by the user.</string>
 </resources>
