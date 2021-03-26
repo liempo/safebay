@@ -7,14 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.coroutineScope
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
+import wtf.liempo.safebay.common.utils.CameraUtils.getCameraProvider
 import wtf.liempo.safebay.databinding.CameraFragmentBinding
 
 class CameraFragment : Fragment() {
@@ -40,50 +42,54 @@ class CameraFragment : Fragment() {
 
         // Check camera permissions first
         if (isCameraPermissionGranted())
-            binding.viewFinder.post {
                 setupCameraX()
-            }
         else requestPermissions(
             arrayOf(CAMERA), RC_PERMISSION)
     }
 
     private fun setupCameraX() {
-        val executor = ContextCompat
-            .getMainExecutor(requireContext())
+        lifecycle.coroutineScope.launchWhenResumed {
+            // Use main executor for camera
+            // initialization and image analysis
+            val executor = ContextCompat
+                .getMainExecutor(requireContext())
 
-        val cameraProviderFuture =
-            ProcessCameraProvider
-                .getInstance(requireContext())
+            // Get camera provider (coroutine-ly)
+            val provider = getCameraProvider(
+                requireContext(), executor)
 
-        cameraProviderFuture.addListener({
-            // Get camera provider to bind use cases
-            val cameraProvider =
-                cameraProviderFuture.get()
+            // Select back camera as a default
+            val selector = CameraSelector
+                .DEFAULT_BACK_CAMERA
 
             // Create a preview use case
             val preview = Preview
                 .Builder()
-                .build().apply {
+                .build()
+                .apply {
                     val surfaceProvider = binding
                         .viewFinder.surfaceProvider
                     setSurfaceProvider(surfaceProvider)
                 }
 
-            // Select back camera as a default
-            val cameraSelector = CameraSelector
-                .DEFAULT_BACK_CAMERA
+            // Create an analysis use case
+            val analysis = ImageAnalysis
+                .Builder()
+                .build().apply {
+                    setAnalyzer(executor,
+                        BarcodeAnalyzer())
+                }
 
             try {
                 // Unbind use cases before rebinding
-                cameraProvider.unbindAll()
+                provider.unbindAll()
 
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview)
-            } catch(e: Exception) {
-                Timber.e(e, "Use case binding failed")
-            }
-        }, executor)
+                provider.bindToLifecycle(
+                    this@CameraFragment,
+                    selector, preview, analysis)
+            } catch(e: Exception) { Timber.e(e) }
+        }
     }
 
     private fun isCameraPermissionGranted() =
