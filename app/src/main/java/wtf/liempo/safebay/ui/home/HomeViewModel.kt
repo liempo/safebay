@@ -1,9 +1,9 @@
-package wtf.liempo.safebay.home.ui
+package wtf.liempo.safebay.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import wtf.liempo.safebay.common.models.Profile
+import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 
 class HomeViewModel : ViewModel() {

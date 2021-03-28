@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.ui
+package wtf.liempo.safebay.ui.auth
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import wtf.liempo.safebay.auth.model.Phase
-import wtf.liempo.safebay.common.models.Type
-import wtf.liempo.safebay.common.models.Profile
+import wtf.liempo.safebay.models.Phase
+import wtf.liempo.safebay.models.Type
+import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 
 class AuthViewModel : ViewModel() {

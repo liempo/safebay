@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.home.ui
+package wtf.liempo.safebay.ui.home
 
 import android.annotation.SuppressLint
 import androidx.camera.core.ImageAnalysis

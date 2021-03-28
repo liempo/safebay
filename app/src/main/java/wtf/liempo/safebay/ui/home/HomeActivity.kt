@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.home.ui
+package wtf.liempo.safebay.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

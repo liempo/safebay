@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/start"
-        android:name="wtf.liempo.safebay.auth.ui.AuthStartFragment"
+        android:name="wtf.liempo.safebay.ui.auth.AuthStartFragment"
         android:label="StartFragment"
         tools:layout="@layout/fragment_auth_start"/>
 
     <fragment
         android:id="@+id/login"
-        android:name="wtf.liempo.safebay.auth.ui.AuthLoginFragment"
+        android:name="wtf.liempo.safebay.ui.auth.AuthLoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_auth_login"/>
 
     <activity
         android:id="@+id/home"
-        android:name="wtf.liempo.safebay.home.ui.HomeActivity"
+        android:name="wtf.liempo.safebay.ui.home.HomeActivity"
         android:label="HomeActivity"
         tools:layout="@layout/activity_home" >
     </activity>
 
     <fragment
         android:id="@+id/profile"
-        android:name="wtf.liempo.safebay.auth.ui.AuthProfileFragment"
+        android:name="wtf.liempo.safebay.ui.auth.AuthProfileFragment"
         android:label="AuthProfileFragment"
         tools:layout="@layout/fragment_auth_profile" />
 

@@ -6,7 +6,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import wtf.liempo.safebay.common.models.Profile
+import wtf.liempo.safebay.models.Profile
 
 class ProfileRepository {
 

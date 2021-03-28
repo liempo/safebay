@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.common.utils
+package wtf.liempo.safebay.utils
 
 import android.content.Context
 import androidx.camera.lifecycle.ProcessCameraProvider

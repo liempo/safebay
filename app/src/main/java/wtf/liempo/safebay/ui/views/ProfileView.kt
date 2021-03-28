@@ -1,12 +1,12 @@
-package wtf.liempo.safebay.common.ui
+package wtf.liempo.safebay.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textfield.TextInputEditText
-import wtf.liempo.safebay.common.models.Address
-import wtf.liempo.safebay.common.models.Profile
+import wtf.liempo.safebay.models.Address
+import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.databinding.ViewProfileBinding
 
 class ProfileView : ConstraintLayout {

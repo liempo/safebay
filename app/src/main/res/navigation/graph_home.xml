@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="wtf.liempo.safebay.home.ui.CameraFragment"
+        android:name="wtf.liempo.safebay.ui.home.CameraFragment"
         android:label="camera_fragment"
-        tools:layout="@layout/camera_fragment" />
+        tools:layout="@layout/fragment_home_camera" />
 </navigation>

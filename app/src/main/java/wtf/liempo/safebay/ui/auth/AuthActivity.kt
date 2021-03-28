@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.ui
+package wtf.liempo.safebay.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.auth.model.Phase
+import wtf.liempo.safebay.models.Phase
 import wtf.liempo.safebay.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {

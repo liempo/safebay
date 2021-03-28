@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Safebay"
         tools:ignore="AllowBackup">
-        <activity android:name=".home.ui.HomeActivity"/>
-        <activity android:name=".auth.ui.AuthActivity">
+        <activity android:name=".ui.home.HomeActivity"/>
+        <activity android:name=".ui.auth.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

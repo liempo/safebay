@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.ui
+package wtf.liempo.safebay.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

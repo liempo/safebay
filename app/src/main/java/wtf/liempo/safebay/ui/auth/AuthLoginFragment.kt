@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.auth.ui
+package wtf.liempo.safebay.ui.auth
 
 import android.app.Activity
 import android.content.Context
@@ -13,7 +13,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.common.models.Type
+import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.databinding.FragmentAuthLoginBinding
 
 class AuthLoginFragment : Fragment() {

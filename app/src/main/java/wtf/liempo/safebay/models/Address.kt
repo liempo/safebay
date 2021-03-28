@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.common.models
+package wtf.liempo.safebay.models
 
 data class Address(
     val line1: String? = null,

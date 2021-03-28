@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.home.ui
+package wtf.liempo.safebay.ui.home
 
 import android.Manifest.permission.CAMERA
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -16,7 +16,7 @@ import androidx.lifecycle.coroutineScope
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.common.utils.CameraUtils.getCameraProvider
+import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
 import wtf.liempo.safebay.databinding.CameraFragmentBinding
 
 class CameraFragment : Fragment() {
@@ -44,7 +44,8 @@ class CameraFragment : Fragment() {
         if (isCameraPermissionGranted())
                 setupCameraX()
         else requestPermissions(
-            arrayOf(CAMERA), RC_PERMISSION)
+            arrayOf(CAMERA), RC_PERMISSION
+        )
     }
 
     private fun setupCameraX() {
