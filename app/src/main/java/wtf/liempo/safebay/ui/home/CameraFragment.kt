@@ -49,6 +49,8 @@ class CameraFragment : Fragment() {
     }
 
     private fun setupCameraX() {
+        Timber.d("Setting up the camera")
+
         lifecycle.coroutineScope.launchWhenResumed {
             // Use main executor for camera
             // initialization and image analysis
@@ -82,14 +84,10 @@ class CameraFragment : Fragment() {
                 }
             }
 
-            // Create an analysis use case
-            // using the BarcodeAnalyzer
             val analysis = ImageAnalysis
                 .Builder()
                 .build().apply {
-                    setAnalyzer(
-                        executor,
-                        analyzer)
+                    setAnalyzer(executor, analyzer)
                 }
 
             try {
