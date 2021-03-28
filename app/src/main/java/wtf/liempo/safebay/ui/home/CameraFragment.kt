@@ -17,12 +17,12 @@ import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
-import wtf.liempo.safebay.databinding.CameraFragmentBinding
+import wtf.liempo.safebay.databinding.FragmentHomeCameraBinding
 
 class CameraFragment : Fragment() {
 
     private val vm: HomeViewModel by activityViewModels()
-    private var _binding: CameraFragmentBinding? = null
+    private var _binding: FragmentHomeCameraBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class CameraFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CameraFragmentBinding.inflate(
+        _binding = FragmentHomeCameraBinding.inflate(
             inflater, container, false)
         return binding.root
     }
