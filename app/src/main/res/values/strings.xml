@@ -17,6 +17,7 @@
     <string name="msg_input_brgy">Baranggay *</string>
     <string name="msg_input_province">Province *</string>
     <string name="msg_input_city">City *</string>
+    <string name="error_profile_image_empty">Please select a profile image.</string>
     <string name="action_sign_up">Finish</string>
 
     <!-- HomeActivity -->

@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.models.Address
@@ -15,6 +17,16 @@ class ProfileView : ConstraintLayout {
 
     private var _binding: ViewProfileBinding? = null
     private val binding get() = _binding!!
+
+    private var _imageUri: String? = null
+    var imageUri: String?
+        get() = _imageUri
+        set(value) {
+            _imageUri = value
+            Glide.with(context)
+                .load(value)
+                .into(binding.imageProfile)
+        }
 
     constructor(
         context: Context,
@@ -59,8 +71,19 @@ class ProfileView : ConstraintLayout {
         }
     }
 
+    fun setProfileImageClickListener(l: OnClickListener) =
+        binding.imageProfile.setOnClickListener(l)
+
+
     fun toProfile(): Profile? {
-        // TODO Implement profile picture upload
+        if (imageUri.isNullOrEmpty()) {
+            Snackbar.make(
+                this,
+                R.string.error_profile_image_empty,
+                Snackbar.LENGTH_SHORT)
+                .show()
+            return null
+        }
 
         return try {
             val name = binding.inputName.getInput(true)
@@ -71,7 +94,7 @@ class ProfileView : ConstraintLayout {
                 binding.inputCity.getInput(true),
                 binding.inputProvince.getInput(true))
 
-            Profile(name, null, address)
+            Profile(name, imageUri, address)
         } catch (e: RequiredFieldEmptyException) { null }
     }
 
