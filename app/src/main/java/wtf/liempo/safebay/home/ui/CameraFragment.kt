@@ -72,12 +72,23 @@ class CameraFragment : Fragment() {
                     setSurfaceProvider(surfaceProvider)
                 }
 
+            // Create the BarcodeAnalyzer and
+            // hook it with viewmodel func
+            val analyzer = BarcodeAnalyzer()
+                .apply {
+                setResultListener {
+                    vm.searchProfile(it)
+                }
+            }
+
             // Create an analysis use case
+            // using the BarcodeAnalyzer
             val analysis = ImageAnalysis
                 .Builder()
                 .build().apply {
-                    setAnalyzer(executor,
-                        BarcodeAnalyzer())
+                    setAnalyzer(
+                        executor,
+                        analyzer)
                 }
 
             try {

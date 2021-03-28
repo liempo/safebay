@@ -16,8 +16,11 @@ class ProfileRepository {
     fun getCurrentUserId(): String? =
         Firebase.auth.currentUser?.uid
 
-    suspend fun getCurrentProfile(): Profile? {
-        val uid = getCurrentUserId() ?: return null
+    suspend fun getCurrentProfile(): Profile? =
+        getProfile(getCurrentUserId() ?:  "")
+
+    suspend fun getProfile(uid: String): Profile? {
+        if (uid.isEmpty()) return null
 
         return try {
             profiles
