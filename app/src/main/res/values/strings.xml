@@ -6,10 +6,12 @@
     <string name="action_business_sign_in">Sign In as Business</string>
 
     <!-- ProfileView -->
-    <string name="title_details">Details</string>
+    <string name="title_details_standard">Personal Details</string>
+    <string name="title_details_business">Business Details</string>
     <string name="msg_input_name">Name *</string>
     <string name="msg_input_pic">Profile Picture</string>
-    <string name="title_address">Address</string>
+    <string name="title_address_standard">Personal Address</string>
+    <string name="title_address_business">Business Address</string>
     <string name="msg_input_address_line_1">House Number / Unit / Building *</string>
     <string name="msg_input_address_line_2">Street / Subdivision</string>
     <string name="msg_input_brgy">Baranggay *</string>

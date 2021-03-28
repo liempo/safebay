@@ -1,5 +1,6 @@
 package wtf.liempo.safebay.ui.auth
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,6 +27,10 @@ class AuthProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val pref = requireActivity()
+            .getPreferences(Context.MODE_PRIVATE)
+        binding.profile.setType(vm.getType(pref))
 
         binding.buttonSignUp.setOnClickListener {
             val profile = binding.profile.toProfile() ?:

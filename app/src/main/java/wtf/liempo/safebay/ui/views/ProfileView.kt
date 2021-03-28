@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textfield.TextInputEditText
+import wtf.liempo.safebay.R
 import wtf.liempo.safebay.models.Address
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.databinding.ViewProfileBinding
+import wtf.liempo.safebay.models.Type
 
 class ProfileView : ConstraintLayout {
 
@@ -38,6 +40,23 @@ class ProfileView : ConstraintLayout {
         _binding = ViewProfileBinding.inflate(
             LayoutInflater.from(context),
             this, true)
+    }
+
+    fun setType(type: Type) {
+        when(type) {
+            Type.STANDARD -> {
+                binding.titleDetails.text =
+                    context.getString(R.string.title_details_standard)
+                binding.titleAddress.text =
+                    context.getString(R.string.title_address_standard)
+            }
+            Type.BUSINESS -> {
+                binding.titleDetails.text =
+                    context.getString(R.string.title_details_business)
+                binding.titleAddress.text =
+                    context.getString(R.string.title_address_business)
+            }
+        }
     }
 
     fun toProfile(): Profile? {

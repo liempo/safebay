@@ -22,7 +22,7 @@
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/title_details"
+        android:text="@string/title_details_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,12 +49,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/title_address"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/title_address"
+        android:text="@string/title_address_standard"
         app:layout_constraintTop_toBottomOf="@+id/layout_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -66,7 +66,7 @@
         android:layout_marginTop="16dp"
         android:hint="@string/msg_input_address_line_1"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        app:layout_constraintTop_toBottomOf="@+id/title_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
