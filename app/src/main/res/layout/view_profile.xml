@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/layout_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layout_name"
-        android:contentDescription="@string/msg_input_pic" />
+        android:contentDescription="@string/msg_profile_image" />
 
     <TextView
         android:id="@+id/title_details"

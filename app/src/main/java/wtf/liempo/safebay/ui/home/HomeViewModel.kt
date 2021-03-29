@@ -5,21 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
+import wtf.liempo.safebay.models.HomeState
 
 class HomeViewModel : ViewModel() {
 
-    private val repo = ProfileRepository()
+    // Data Repositories
+    private val profiles = ProfileRepository()
 
-    // Contains the current profile detected with scanner
-    private val _detected = MutableLiveData<Profile>()
-    val detected: LiveData<Profile> = _detected
+    // Non-observable data, used internally
+    private var profile: Profile? = null
+
+    // Determines the state of the home activity
+    private val _state = MutableLiveData<HomeState>()
+    val state: LiveData<HomeState> = _state
 
     suspend fun searchProfile(barcode: String) {
-        // Use postValue instead of setValue
-        // because this function will run
-        // on background threads
-        _detected.postValue(
-            repo.getProfile(barcode))
+        // Save the currently detected profile if not null
+        profile = profiles.getProfile(barcode) ?: return
+        _state.postValue(HomeState.CONFIRM)
     }
 
 }

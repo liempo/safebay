@@ -23,8 +23,14 @@ class BarcodeAnalyzer: ImageAnalysis.Analyzer {
         BarcodeScanning.getClient(options)
     }
 
+    // Create an accessible member to control analysis
+    var isPaused = false
+
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(proxy: ImageProxy) {
+        // Skip this function if isPaused is true
+        if (isPaused) return
+
         // Get image from proxy and return if null
         val mediaImage = proxy.image ?: return
 

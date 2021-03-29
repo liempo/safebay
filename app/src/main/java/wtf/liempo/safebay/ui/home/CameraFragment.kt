@@ -18,12 +18,16 @@ import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
 import wtf.liempo.safebay.databinding.FragmentHomeCameraBinding
+import wtf.liempo.safebay.models.HomeState
 
 class CameraFragment : Fragment() {
 
     private val vm: HomeViewModel by activityViewModels()
     private var _binding: FragmentHomeCameraBinding? = null
     private val binding get() = _binding!!
+
+    // Create the barcode analyzer here
+    private val analyzer = BarcodeAnalyzer()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +43,15 @@ class CameraFragment : Fragment() {
         view: View, savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        // Setup the analyzer once view created
+        analyzer.setResultListener {
+            vm.searchProfile(it)
+        }
+
+        // Pause the analyzer if state is CONFIRM
+        vm.state.observe(viewLifecycleOwner, {
+            analyzer.isPaused = it == HomeState.CONFIRM
+        })
 
         // Check camera permissions first
         if (isCameraPermissionGranted())
@@ -74,15 +87,6 @@ class CameraFragment : Fragment() {
                         .viewFinder.surfaceProvider
                     setSurfaceProvider(surfaceProvider)
                 }
-
-            // Create the BarcodeAnalyzer and
-            // hook it with viewmodel func
-            val analyzer = BarcodeAnalyzer()
-                .apply {
-                setResultListener {
-                    vm.searchProfile(it)
-                }
-            }
 
             val analysis = ImageAnalysis
                 .Builder()
