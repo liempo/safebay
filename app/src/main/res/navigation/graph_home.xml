@@ -11,12 +11,15 @@
         android:label="camera_fragment"
         tools:layout="@layout/fragment_home_scan" >
         <action
-            android:id="@+id/action_camera_to_confirm"
+            android:id="@+id/action_confirm_scan"
             app:destination="@id/confirm" />
     </fragment>
     <dialog
         android:id="@+id/confirm"
-        android:name="wtf.liempo.safebay.ui.home.ConfirmFragment"
+        android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
         android:label="fragment_confirm"
-        tools:layout="@layout/fragment_confirm" />
+        tools:layout="@layout/fragment_home_confirm" />
+    <action
+        android:id="@+id/to_scan"
+        app:destination="@id/scan" />
 </navigation>

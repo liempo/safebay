@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
@@ -44,11 +45,16 @@ class HomeScanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Setup the analyzer once view created
         analyzer.setResultListener {
-            vm.searchProfile(it)
+            vm.detectProfile(it)
         }
 
-        // Pause the analyzer if state is CONFIRM
-        vm.state.observe(viewLifecycleOwner, {
+        vm.detected.observe(viewLifecycleOwner, {
+            // Pause the analyzer if a profile is detected
+            analyzer.isPaused = it != null
+
+            // Show Confirm dialog
+            findNavController().navigate(
+                R.id.action_confirm_scan)
         })
 
         // Check camera permissions first

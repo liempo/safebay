@@ -12,17 +12,23 @@ class HomeViewModel : ViewModel() {
     // Data Repositories
     private val profiles = ProfileRepository()
 
-    // Non-observable data, used internally
-    private var profile: Profile? = null
-
     // Determines the state of the home activity
     private val _state = MutableLiveData<HomeState>()
     val state: LiveData<HomeState> = _state
 
-    suspend fun searchProfile(barcode: String) {
-        // Save the currently detected profile if not null
-        profile = profiles.getProfile(barcode) ?: return
-        _state.postValue(HomeState.CONFIRM)
+    private val _detected = MutableLiveData<Profile?>()
+    val detected: LiveData<Profile?> = _detected
+
+    suspend fun detectProfile(barcode: String) {
+        // Use postValue instead of setValue
+        // because this function will run
+        // on background threads
+        _detected.postValue(
+            profiles.getProfile(barcode))
+    }
+
+    fun clearDetectedProfile() {
+        _detected.value = null
     }
 
 }

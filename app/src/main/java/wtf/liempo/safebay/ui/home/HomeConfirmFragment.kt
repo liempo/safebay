@@ -32,16 +32,26 @@ class HomeConfirmFragment : DialogFragment() {
 
         // Create onClicks for buttons
         binding.buttonConfirm.setOnClickListener {
-            TODO()
+            close()
         }
 
         binding.buttonCancel.setOnClickListener {
-            dismiss()
+            close()
         }
 
-        // Update fields with detected profile
+        // READ ME, VERY IMPORTANT
+        // So I'm kinda having a crisis here whether
+        // HomeScanFragment should pass the Profile here
+        // or HomeConfirmFragment should access the detected
+        // Profile using the viewModel. Both works but I don't
+        // know which one of them follows the MVVM Architecture.
+        //
+        // Alec
         vm.detected.observe(viewLifecycleOwner, {
-            if (it == null) return@observe
+            if (it == null)
+                return@observe
+
+            // Update fields with detected profile
             Glide.with(binding.root)
                 .load(it.imageUri)
                 .into(binding.imageProfile)
@@ -50,5 +60,8 @@ class HomeConfirmFragment : DialogFragment() {
                 it.address.toString()
         })
     }
+
+    /** Close this fragment, clear any detected profile */
+    private fun close() { vm.clearDetectedProfile(); dismiss() }
 
 }
