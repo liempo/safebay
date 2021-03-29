@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import wtf.liempo.safebay.databinding.FragmentHomeConfirmBinding
 
 class HomeConfirmFragment : DialogFragment() {
@@ -22,6 +23,32 @@ class HomeConfirmFragment : DialogFragment() {
         _binding = FragmentHomeConfirmBinding.inflate(
             inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(
+        view: View, savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Create onClicks for buttons
+        binding.buttonConfirm.setOnClickListener {
+            TODO()
+        }
+
+        binding.buttonCancel.setOnClickListener {
+            dismiss()
+        }
+
+        // Update fields with detected profile
+        vm.detected.observe(viewLifecycleOwner, {
+            if (it == null) return@observe
+            Glide.with(binding.root)
+                .load(it.imageUri)
+                .into(binding.imageProfile)
+            binding.textName.text = it.name
+            binding.textAddress.text =
+                it.address.toString()
+        })
     }
 
 }

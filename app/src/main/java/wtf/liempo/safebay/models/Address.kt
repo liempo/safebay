@@ -6,4 +6,8 @@ data class Address(
     val brgy: String? = null,
     val city: String? = null,
     val province: String? = null
-)
+) {
+    override fun toString(): String {
+        return "$brgy, $city, $province"
+    }
+}

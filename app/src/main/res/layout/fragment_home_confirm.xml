@@ -15,23 +15,26 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:id="@+id/image_profile"
+            android:layout_width="256dp"
             android:layout_height="256dp"
-            android:scaleType="centerInside"
+            android:contentDescription="@string/msg_profile_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic"
-            android:contentDescription="@string/msg_profile_image" />
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/text_name"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="Alecafe"
-            style="@style/TextAppearance.MaterialComponents.Headline6" />
+            app:layout_constraintTop_toBottomOf="@+id/image_profile"
+            tools:text="Alecafe" />
 
         <TextView
             android:id="@+id/text_address"
