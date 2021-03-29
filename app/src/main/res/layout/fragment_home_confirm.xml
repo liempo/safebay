@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="32dp"
     app:cardCornerRadius="8dp"
-    tools:context=".ui.home.ConfirmFragment">
+    tools:context=".ui.home.HomeConfirmFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
