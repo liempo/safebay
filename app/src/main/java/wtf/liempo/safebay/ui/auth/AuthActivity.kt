@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.models.Phase
+import wtf.liempo.safebay.models.AuthState
 import wtf.liempo.safebay.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
@@ -25,23 +25,23 @@ class AuthActivity : AppCompatActivity() {
             .inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Get navController first
+        // Get navController firstp
         controller = (supportFragmentManager
             .findFragmentById(R.id.container)
                 as NavHostFragment)
             .navController
 
         // Start the authentication flow
-        vm.startPhaseCheck()
+        vm.startStateCheck()
 
         // Set up the view model
-        vm.phase.observe(this, {
+        vm.state.observe(this, {
             Timber.d("Phase: $it")
 
             val actionId = when (it) {
-                Phase.LOGIN -> R.id.to_login
-                Phase.PROFILE -> R.id.to_profile
-                Phase.FINISH ->  R.id.to_home
+                AuthState.LOGIN -> R.id.to_login
+                AuthState.PROFILE -> R.id.to_profile
+                AuthState.FINISH ->  R.id.to_home
                 else -> return@observe
             }; controller.navigate(actionId)
         })

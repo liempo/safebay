@@ -8,39 +8,41 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import wtf.liempo.safebay.data.ImageRepository
-import wtf.liempo.safebay.models.Phase
+import wtf.liempo.safebay.models.AuthState
 import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 
 class AuthViewModel : ViewModel() {
 
+    // Data Repositories
     private val profiles = ProfileRepository()
     private val images = ImageRepository()
 
+    // Non-observable data, used internally
     private val uid = profiles.getCurrentUserId()
 
     // Determines the state of the authentication
-    private val _phase = MutableLiveData<Phase>()
-    val phase: LiveData<Phase> = _phase
+    private val _state = MutableLiveData<AuthState>()
+    val state: LiveData<AuthState> = _state
 
-    fun startPhaseCheck() {
+    fun startStateCheck() {
         viewModelScope.launch {
-            _phase.value =
+            _state.value =
                 if (!uid.isNullOrEmpty()) {
                     if (profiles.getCurrentProfile() != null)
-                        Phase.FINISH
-                    else Phase.PROFILE
-                } else Phase.LOGIN
+                        AuthState.FINISH
+                    else AuthState.PROFILE
+                } else AuthState.LOGIN
         }
     }
 
     fun startProfileCheck() {
         viewModelScope.launch {
-            _phase.value =
+            _state.value =
                 if (profiles.getCurrentProfile() != null)
-                    Phase.FINISH
-                else Phase.PROFILE
+                    AuthState.FINISH
+                else AuthState.PROFILE
         }
     }
 
@@ -59,10 +61,10 @@ class AuthViewModel : ViewModel() {
             val updated = profile.copy(
                 imageUri = imageUri)
 
-            _phase.value =
+            _state.value =
                 if (profiles.setCurrentProfile(updated))
-                    Phase.FINISH
-                else Phase.PROFILE
+                    AuthState.FINISH
+                else AuthState.PROFILE
         }
     }
 
