@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph_home"
-    app:startDestination="@id/camera">
+    app:startDestination="@id/scan">
 
     <fragment
-        android:id="@+id/camera"
-        android:name="wtf.liempo.safebay.ui.home.CameraFragment"
+        android:id="@+id/scan"
+        android:name="wtf.liempo.safebay.ui.home.HomeScanFragment"
         android:label="camera_fragment"
-        tools:layout="@layout/fragment_home_camera" >
+        tools:layout="@layout/fragment_home_scan" >
         <action
             android:id="@+id/action_camera_to_confirm"
             app:destination="@id/confirm" />

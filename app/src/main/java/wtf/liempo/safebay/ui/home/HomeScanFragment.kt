@@ -17,13 +17,12 @@ import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
-import wtf.liempo.safebay.databinding.FragmentHomeCameraBinding
-import wtf.liempo.safebay.models.HomeState
+import wtf.liempo.safebay.databinding.FragmentHomeScanBinding
 
-class CameraFragment : Fragment() {
+class HomeScanFragment : Fragment() {
 
     private val vm: HomeViewModel by activityViewModels()
-    private var _binding: FragmentHomeCameraBinding? = null
+    private var _binding: FragmentHomeScanBinding? = null
     private val binding get() = _binding!!
 
     // Create the barcode analyzer here
@@ -34,7 +33,7 @@ class CameraFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeCameraBinding.inflate(
+        _binding = FragmentHomeScanBinding.inflate(
             inflater, container, false)
         return binding.root
     }
@@ -50,7 +49,6 @@ class CameraFragment : Fragment() {
 
         // Pause the analyzer if state is CONFIRM
         vm.state.observe(viewLifecycleOwner, {
-            analyzer.isPaused = it == HomeState.CONFIRM
         })
 
         // Check camera permissions first
@@ -100,7 +98,7 @@ class CameraFragment : Fragment() {
 
                 // Bind use cases to camera
                 provider.bindToLifecycle(
-                    this@CameraFragment,
+                    this@HomeScanFragment,
                     selector, preview, analysis)
             } catch(e: Exception) { Timber.e(e) }
         }
