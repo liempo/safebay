@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
     private val logs = LogRepository()
 
     // Non-observable data, used internally
-    private val guestId = profiles.currentUserId
+    private val guestId = profiles.getCurrentUserId()
     private var businessId: String? = null
 
     // Determines the state of the home activity

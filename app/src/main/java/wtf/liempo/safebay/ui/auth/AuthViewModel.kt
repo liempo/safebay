@@ -21,7 +21,7 @@ class AuthViewModel : ViewModel() {
 
     // Non-observable data, used internally
     private val uid: String?
-        get() = profiles.currentUserId
+        get() = profiles.getCurrentUserId()
 
     // Determines the state of the authentication
     private val _state = MutableLiveData<AuthState>()
