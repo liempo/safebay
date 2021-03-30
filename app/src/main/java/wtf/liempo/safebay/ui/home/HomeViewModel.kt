@@ -14,10 +14,15 @@ class HomeViewModel : ViewModel() {
 
     // Determines the state of the home activity
     private val _state = MutableLiveData<HomeState>()
+        .apply { value = HomeState.SCAN }
     val state: LiveData<HomeState> = _state
 
     private val _detected = MutableLiveData<Profile?>()
     val detected: LiveData<Profile?> = _detected
+
+    fun setState(state: HomeState) {
+        _state.value = state
+    }
 
     suspend fun detectProfile(barcode: String) {
         // Use postValue instead of setValue

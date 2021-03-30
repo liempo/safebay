@@ -49,8 +49,13 @@ class HomeScanFragment : Fragment() {
         }
 
         vm.detected.observe(viewLifecycleOwner, {
-            // Pause the analyzer if a profile is detected
-            analyzer.isPaused = it != null
+            // isPause = it != null
+            if (it == null) {
+                analyzer.isPaused = false
+                return@observe
+            }
+            analyzer.isPaused = true
+
 
             // Show Confirm dialog
             findNavController().navigate(
