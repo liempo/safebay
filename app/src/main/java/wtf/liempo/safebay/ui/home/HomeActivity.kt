@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.ActivityHomeBinding
 import wtf.liempo.safebay.models.HomeState
@@ -29,7 +30,13 @@ class HomeActivity : AppCompatActivity() {
                 as NavHostFragment)
             .navController
 
+        binding.fab.setOnClickListener {
+            vm.setState(HomeState.SCAN)
+        }
+
         vm.state.observe(this, {
+            Timber.d("State: $it")
+
             val actionId = when (it) {
                 HomeState.SCAN -> R.id.to_scan
                 HomeState.LIST -> TODO()
