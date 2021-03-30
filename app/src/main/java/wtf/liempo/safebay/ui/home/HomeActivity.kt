@@ -3,8 +3,10 @@ package wtf.liempo.safebay.ui.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomappbar.BottomAppBar.*
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.ActivityHomeBinding
@@ -37,11 +39,22 @@ class HomeActivity : AppCompatActivity() {
         vm.state.observe(this, {
             Timber.d("State: $it")
 
-            val actionId = when (it) {
-                HomeState.SCAN -> R.id.to_scan
+            when (it) {
+                HomeState.SCAN -> {
+                    // Change fab icon to help
+                    binding.fab.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this, R.drawable.ic_help_24))
+
+                    // Change fragment
+                    controller.navigate(
+                        R.id.to_scan)
+                }
+
                 HomeState.LIST -> TODO()
+
                 else -> return@observe
-            }; controller.navigate(actionId)
+            }
         })
 
     }

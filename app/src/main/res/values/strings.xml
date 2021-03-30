@@ -21,10 +21,11 @@
     <string name="action_sign_up">Finish</string>
 
     <!-- HomeActivity -->
-    <string name="title_home">Home</string>
+    <string name="title_trace">Trace Logs</string>
     <string name="msg_camera_denied">Camera permission not granted by the user.</string>
     <string name="msg_check_in">Do you want to check in?</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
+    <string name="title_settings">Settings</string>
 
 </resources>
