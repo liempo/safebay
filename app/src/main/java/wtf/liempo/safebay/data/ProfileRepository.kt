@@ -13,11 +13,11 @@ class ProfileRepository {
     private val collection = Firebase.firestore
         .collection("profiles")
 
-    fun getCurrentUserId(): String? =
+    val currentUserId =
         Firebase.auth.currentUser?.uid
 
     suspend fun getCurrentProfile(): Profile? =
-        getProfile(getCurrentUserId() ?:  "")
+        getProfile(currentUserId ?:  "")
 
     suspend fun getProfile(uid: String): Profile? {
         if (uid.isEmpty()) return null
@@ -32,7 +32,7 @@ class ProfileRepository {
     }
 
     suspend fun setCurrentProfile(update: Profile): Boolean {
-        val uid = getCurrentUserId() ?: return false
+        val uid = currentUserId ?: return false
 
         return try {
             collection

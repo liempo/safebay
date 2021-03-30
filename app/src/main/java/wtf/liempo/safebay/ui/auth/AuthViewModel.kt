@@ -20,7 +20,7 @@ class AuthViewModel : ViewModel() {
     private val images = ImageRepository()
 
     // Non-observable data, used internally
-    private val uid = profiles.getCurrentUserId()
+    private val uid = profiles.currentUserId
 
     // Determines the state of the authentication
     private val _state = MutableLiveData<AuthState>()
@@ -55,8 +55,7 @@ class AuthViewModel : ViewModel() {
             // and imageUri must be verified before calling
             // startProfileCheck. Thank you, have a good day!
             val imageUri = images.uploadProfileImage(
-                profiles.getCurrentUserId()!!,
-                profile.imageUri!!)
+                uid!!, profile.imageUri!!)
 
             val updated = profile.copy(
                 imageUri = imageUri)
