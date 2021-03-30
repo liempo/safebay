@@ -20,11 +20,16 @@ class AuthViewModel : ViewModel() {
     private val images = ImageRepository()
 
     // Non-observable data, used internally
-    private val uid = profiles.currentUserId
+    private val uid: String?
+        get() = profiles.currentUserId
 
     // Determines the state of the authentication
     private val _state = MutableLiveData<AuthState>()
     val state: LiveData<AuthState> = _state
+
+    // Notify the the UI if some elements are loading
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
 
     fun startStateCheck() {
         viewModelScope.launch {
