@@ -10,8 +10,8 @@ import wtf.liempo.safebay.models.Profile
 
 class ProfileRepository {
 
-    private val profiles = Firebase.firestore
-        .collection("profile")
+    private val collection = Firebase.firestore
+        .collection("profiles")
 
     fun getCurrentUserId(): String? =
         Firebase.auth.currentUser?.uid
@@ -23,7 +23,7 @@ class ProfileRepository {
         if (uid.isEmpty()) return null
 
         return try {
-            profiles
+            collection
                 .document(uid)
                 .get()
                 .await()
@@ -35,7 +35,7 @@ class ProfileRepository {
         val uid = getCurrentUserId() ?: return false
 
         return try {
-            profiles
+            collection
                 .document(uid)
                 .set(update)
                 .await()

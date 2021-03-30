@@ -8,8 +8,8 @@ import kotlinx.coroutines.tasks.await
 
 class ImageRepository {
 
-    private val profileImageRef = Firebase.storage
-        .reference.child("profile_photo")
+    private val reference = Firebase.storage
+        .reference.child("profile_images")
 
     suspend fun uploadProfileImage(
         uid: String,
@@ -17,7 +17,7 @@ class ImageRepository {
     ): String? =
          try {
            val uri = Uri.parse(photoUri)
-            val ref = profileImageRef.child(uid)
+            val ref = reference.child(uid)
                 .also {
                     it.putFile(uri)
                         .await()
