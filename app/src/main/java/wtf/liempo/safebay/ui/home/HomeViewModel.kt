@@ -20,6 +20,22 @@ class HomeViewModel : ViewModel() {
     private val _detected = MutableLiveData<Profile?>()
     val detected: LiveData<Profile?> = _detected
 
+    /** This function will be called
+     *  by the main button (fab),
+     *  sets the primary state of Home */
+    fun setPrimaryState() {
+        _state.value = when (_state.value) {
+            // Swap primary state only
+            HomeState.SCAN -> HomeState.HELP
+            HomeState.HELP -> HomeState.SCAN
+
+            // If coming from any other state
+            else -> HomeState.SCAN // default
+        }
+    }
+
+    /** Generic function for switching state,
+     *  Will be called by onClickListeners */
     fun setState(state: HomeState) {
         _state.value = state
     }

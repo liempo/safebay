@@ -1,6 +1,9 @@
 package wtf.liempo.safebay.models
 
 enum class HomeState {
-    SCAN,
-    LIST
+    // Primary
+    SCAN, HELP,
+
+    // Secondary
+    LIST, SETTINGS
 }

@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
             .navController
 
         binding.fab.setOnClickListener {
-            vm.setState(HomeState.SCAN)
+            vm.setPrimaryState()
         }
 
         vm.state.observe(this, {
@@ -52,10 +52,10 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 HomeState.LIST -> TODO()
+                HomeState.SETTINGS -> TODO()
 
                 else -> return@observe
             }
         })
-
     }
 }
