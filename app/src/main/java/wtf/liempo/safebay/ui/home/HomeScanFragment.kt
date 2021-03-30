@@ -124,8 +124,11 @@ class HomeScanFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == RC_PERMISSION &&
-            isCameraPermissionGranted())
+        // Return if wrong requestCode
+        if (requestCode != RC_PERMISSION)
+            return
+
+        if (isCameraPermissionGranted())
             setupCameraX()
         else {
             Snackbar.make(
