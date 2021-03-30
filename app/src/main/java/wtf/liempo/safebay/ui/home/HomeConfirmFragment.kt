@@ -30,14 +30,24 @@ class HomeConfirmFragment : DialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initially hide progress bar and main content
+        binding.progress.hide()
+
         // Create onClicks for buttons
         binding.buttonConfirm.setOnClickListener {
-            close()
         }
 
         binding.buttonCancel.setOnClickListener {
             close()
         }
+
+        vm.logged.observe(viewLifecycleOwner, {
+            if (!it) {
+                binding.buttons.visibility =
+                    View.INVISIBLE
+                binding.progress.show()
+            }
+        })
 
         // READ ME, VERY IMPORTANT
         // So I'm kinda having a crisis here whether
