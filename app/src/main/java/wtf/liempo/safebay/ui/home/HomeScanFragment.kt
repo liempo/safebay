@@ -10,6 +10,7 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
@@ -17,8 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
-import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
 import wtf.liempo.safebay.databinding.FragmentHomeScanBinding
+import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
 
 class HomeScanFragment : Fragment() {
 
@@ -26,7 +27,7 @@ class HomeScanFragment : Fragment() {
     private var _binding: FragmentHomeScanBinding? = null
     private val binding get() = _binding!!
 
-    // Create the barcode analyzer here
+    // Create the analyzer here to be attached later
     private val analyzer = BarcodeAnalyzer()
 
     override fun onCreateView(
@@ -49,17 +50,10 @@ class HomeScanFragment : Fragment() {
         }
 
         vm.detected.observe(viewLifecycleOwner, {
-            // isPause = it != null
-            if (it == null) {
-                analyzer.isPaused = false
-                return@observe
-            }
-            analyzer.isPaused = true
-
-
-            // Show Confirm dialog
+            // Show Confirm dialog and pass profile
             findNavController().navigate(
-                R.id.action_confirm_scan)
+                R.id.action_confirm_scan,
+                bundleOf("profile" to it))
         })
 
         // Check camera permissions first
@@ -83,9 +77,6 @@ class HomeScanFragment : Fragment() {
             val provider = getCameraProvider(
                 requireContext(), executor)
 
-            // Select back camera as a default
-            val selector = CameraSelector
-                .DEFAULT_BACK_CAMERA
 
             // Create a preview use case
             val preview = Preview
@@ -102,6 +93,10 @@ class HomeScanFragment : Fragment() {
                 .build().apply {
                     setAnalyzer(executor, analyzer)
                 }
+
+            // Select back camera as a default
+            val selector = CameraSelector
+                .DEFAULT_BACK_CAMERA
 
             try {
                 // Unbind use cases before rebinding

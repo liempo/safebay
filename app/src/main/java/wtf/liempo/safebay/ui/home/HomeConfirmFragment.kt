@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeConfirmBinding
+import wtf.liempo.safebay.models.Profile
 
 class HomeConfirmFragment : DialogFragment() {
 
@@ -30,44 +32,44 @@ class HomeConfirmFragment : DialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Extract profile from args
+        val profile: Profile? = arguments?.
+            getParcelable("profile")
+
+        // Update fields with profile
+        profile?.let {
+            Glide.with(binding.root)
+                .load(profile.imageUri)
+                .into(binding.imageProfile)
+            binding.textName.text = profile.name
+            binding.textAddress.text =
+                profile.address.toString()
+        }
+
         // Initially hide progress bar and main content
         binding.progress.hide()
 
         // Create onClicks for buttons
-        binding.buttonConfirm.setOnClickListener {
-        }
-
-        binding.buttonCancel.setOnClickListener {
-            close()
-        }
+        binding.buttonConfirm
+            .setOnClickListener {
+                vm.startLogProfile()
+            }
+        binding.buttonCancel
+            .setOnClickListener {
+                close()
+            }
 
         vm.logged.observe(viewLifecycleOwner, {
-            if (!it) {
-                binding.buttons.visibility =
-                    View.INVISIBLE
+            if (!it) { // Log starting
+                binding.buttons.visibility = View.GONE
                 binding.progress.show()
+                binding.textMessage.text = getString(
+                    R.string.msg_log_loading)
+            } else {
+                binding.progress.hide()
+                binding.textMessage.text = getString(
+                    R.string.msg_log_done)
             }
-        })
-
-        // READ ME, VERY IMPORTANT
-        // So I'm kinda having a crisis here whether
-        // HomeScanFragment should pass the Profile here
-        // or HomeConfirmFragment should access the detected
-        // Profile using the viewModel. Both works but I don't
-        // know which one of them follows the MVVM Architecture.
-        //
-        // Alec
-        vm.detected.observe(viewLifecycleOwner, {
-            if (it == null)
-                return@observe
-
-            // Update fields with detected profile
-            Glide.with(binding.root)
-                .load(it.imageUri)
-                .into(binding.imageProfile)
-            binding.textName.text = it.name
-            binding.textAddress.text =
-                it.address.toString()
         })
     }
 

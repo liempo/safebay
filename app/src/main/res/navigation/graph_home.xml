@@ -18,7 +18,13 @@
         android:id="@+id/confirm"
         android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
         android:label="fragment_confirm"
-        tools:layout="@layout/fragment_home_confirm" />
+        tools:layout="@layout/fragment_home_confirm" >
+        <argument
+            android:name="profile"
+            app:argType="wtf.liempo.safebay.models.Profile"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </dialog>
     <action
         android:id="@+id/to_scan"
         app:destination="@id/scan" />

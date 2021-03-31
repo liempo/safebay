@@ -19,6 +19,7 @@ class HomeViewModel : ViewModel() {
     private val logs = LogRepository()
 
     // Non-observable data, used internally
+    private var processBarcode = true
     private val guestId = profiles.getCurrentUserId()
     private var businessId: String? = null
 
@@ -29,8 +30,8 @@ class HomeViewModel : ViewModel() {
 
     // Initially null and when something is scanned
     // using detectProfile(), result will be saved here
-    private val _detected = MutableLiveData<Profile?>()
-    val detected: LiveData<Profile?> = _detected
+    private val _detected = SingleLiveEvent<Profile>()
+    val detected: LiveData<Profile> = _detected
 
     // Will be used to send notifications to activity
     private val _notification = SingleLiveEvent<String>()
@@ -61,6 +62,9 @@ class HomeViewModel : ViewModel() {
     }
 
     suspend fun detectProfile(barcode: String) {
+        // Close if barcode should not be processed
+        if (!processBarcode) return
+
         // Fetch the profile, return if null
         val profile = profiles
             .getProfile(barcode) ?: return
@@ -69,6 +73,7 @@ class HomeViewModel : ViewModel() {
         // because this function will run
         // on background threads
         _detected.postValue(profile)
+        processBarcode = false
 
         // Update the businessId of the profile
         // To be used later for startLogProfile
@@ -76,7 +81,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun clearDetectedProfile() {
-        _detected.value = null
+        processBarcode = true
         businessId = ""
     }
 
@@ -97,7 +102,11 @@ class HomeViewModel : ViewModel() {
                 guestId, businessId)
             logs.saveLog(data)
 
+            // Notify UI that logging done
             _logged.value = true
+
+            // Reset profile detection
+            clearDetectedProfile()
         }
     }
 

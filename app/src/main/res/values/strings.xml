@@ -24,6 +24,8 @@
     <string name="title_trace">Trace Logs</string>
     <string name="msg_camera_denied">Camera permission not granted by the user.</string>
     <string name="msg_check_in">Do you want to check in?</string>
+    <string name="msg_log_loading">Please wait, your information is being saved</string>
+    <string name="msg_log_done">Your information has been logged. Thanks for using Safebay!</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
     <string name="title_settings">Settings</string>
