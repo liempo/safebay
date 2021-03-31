@@ -27,10 +27,6 @@ class AuthViewModel : ViewModel() {
     private val _state = MutableLiveData<AuthState>()
     val state: LiveData<AuthState> = _state
 
-    // Notify the the UI if some elements are loading
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
     fun startStateCheck() {
         viewModelScope.launch {
             _state.value =

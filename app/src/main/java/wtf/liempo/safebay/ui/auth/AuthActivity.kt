@@ -25,7 +25,7 @@ class AuthActivity : AppCompatActivity() {
             .inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Get navController firstp
+        // Get navController first
         controller = (supportFragmentManager
             .findFragmentById(R.id.container)
                 as NavHostFragment)
