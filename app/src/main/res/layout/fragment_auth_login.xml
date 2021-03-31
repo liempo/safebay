@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".ui.auth.AuthActivity">
 
     <ImageView
@@ -21,30 +22,31 @@
         app:srcCompat="@drawable/banner_app"
         tools:ignore="ContentDescription" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button_standard_sign_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:text="@string/action_standard_sign_in"
         app:layout_constraintEnd_toEndOf="@+id/image_banner"
         app:layout_constraintStart_toStartOf="@+id/image_banner"
-        app:layout_constraintTop_toBottomOf="@+id/image_banner">
+        app:layout_constraintTop_toBottomOf="@+id/image_banner" />
 
-        <Button
-            android:id="@+id/button_standard_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/action_standard_sign_in"/>
+    <Button
+        android:id="@+id/button_business_sign_in"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_business_sign_in"
+        app:layout_constraintEnd_toEndOf="@+id/image_banner"
+        app:layout_constraintStart_toStartOf="@+id/image_banner"
+        app:layout_constraintTop_toBottomOf="@+id/button_standard_sign_in" />
 
-        <Button
-            android:id="@+id/button_business_sign_in"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/action_business_sign_in" />
-
-    </LinearLayout>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="button_business_sign_in,button_standard_sign_in" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

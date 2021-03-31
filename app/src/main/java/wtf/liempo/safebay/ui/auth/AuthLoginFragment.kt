@@ -15,7 +15,9 @@ import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.databinding.FragmentAuthLoginBinding
+import wtf.liempo.safebay.models.AuthState
 
+@Suppress("DEPRECATION")
 class AuthLoginFragment : Fragment() {
 
     private val vm: AuthViewModel by activityViewModels()
@@ -34,6 +36,11 @@ class AuthLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        vm.state.observe(viewLifecycleOwner, {
+            if (it == AuthState.LOGIN)
+                binding.buttons.visibility = View.VISIBLE
+        })
 
         binding.buttonStandardSignIn
             .setOnClickListener { startAuthUI(Type.STANDARD) }
