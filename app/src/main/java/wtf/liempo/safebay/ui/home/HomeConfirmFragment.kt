@@ -1,5 +1,6 @@
 package wtf.liempo.safebay.ui.home
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,7 @@ class HomeConfirmFragment : DialogFragment() {
             }
         binding.buttonCancel
             .setOnClickListener {
-                close()
+                dismiss()
             }
 
         vm.logged.observe(viewLifecycleOwner, {
@@ -73,7 +74,9 @@ class HomeConfirmFragment : DialogFragment() {
         })
     }
 
-    /** Close this fragment, clear any detected profile */
-    private fun close() { vm.clearDetectedProfile(); dismiss() }
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        vm.clearDetectedProfile()
+    }
 
 }
