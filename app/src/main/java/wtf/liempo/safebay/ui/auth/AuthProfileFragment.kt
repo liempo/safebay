@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import wtf.liempo.safebay.databinding.FragmentAuthProfileBinding
 
+@Suppress("DEPRECATION")
 class AuthProfileFragment : Fragment() {
 
     private val vm: AuthViewModel by activityViewModels()
