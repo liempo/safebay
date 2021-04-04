@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <wtf.liempo.safebay.ui.views.ProfileView
-            android:id="@+id/dest_profile"
+            android:id="@+id/profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
