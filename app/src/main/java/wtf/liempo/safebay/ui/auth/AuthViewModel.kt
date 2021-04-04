@@ -1,7 +1,6 @@
 package wtf.liempo.safebay.ui.auth
 
 import android.content.SharedPreferences
-import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,12 +11,14 @@ import wtf.liempo.safebay.models.AuthState
 import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
+import wtf.liempo.safebay.data.TypeRepository
 
 class AuthViewModel : ViewModel() {
 
     // Data Repositories
     private val profiles = ProfileRepository()
     private val images = ImageRepository()
+    private val types = TypeRepository()
 
     // Non-observable data, used internally
     private val uid: String?
@@ -68,18 +69,10 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    fun setType(pref: SharedPreferences, type: Type) {
-        pref.edit { putString(PREF_KEY_TYPE, type.toString()) }
-    }
+    fun setType(pref: SharedPreferences, type: Type) =
+        types.setType(pref, type)
 
-    fun getType(pref: SharedPreferences): Type {
-        val value = pref.getString(PREF_KEY_TYPE, null)
-            ?: return Type.STANDARD
-        return Type.valueOf(value)
-    }
-
-    companion object {
-        private const val PREF_KEY_TYPE = "auth_type"
-    }
+    fun getType(pref: SharedPreferences): Type =
+        types.getType(pref)
 
 }
