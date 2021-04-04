@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph_home"
-    app:startDestination="@id/scan">
+    app:startDestination="@id/code">
 
     <fragment
         android:id="@+id/scan"
         android:name="wtf.liempo.safebay.ui.home.HomeScanFragment"
-        android:label="camera_fragment"
-        tools:layout="@layout/fragment_home_scan" >
+        android:label="fragment_home_scan"
+        tools:layout="@layout/fragment_home_scan">
         <action
             android:id="@+id/action_confirm_scan"
             app:destination="@id/confirm" />
@@ -17,7 +17,7 @@
     <dialog
         android:id="@+id/confirm"
         android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
-        android:label="fragment_confirm"
+        android:label="fragment_home_confirm"
         tools:layout="@layout/fragment_home_confirm" >
         <argument
             android:name="profile"
@@ -26,6 +26,18 @@
             android:defaultValue="@null" />
     </dialog>
     <action
-        android:id="@+id/to_scan"
+        android:id="@+id/action_to_scan"
         app:destination="@id/scan" />
+    <fragment
+        android:id="@+id/code"
+        android:name="wtf.liempo.safebay.ui.home.HomeCodeFragment"
+        android:label="fragment_home_code"
+        tools:layout="@layout/fragment_home_code" >
+        <action
+            android:id="@+id/action_code_to_scan"
+            app:destination="@id/scan" />
+    </fragment>
+    <action
+        android:id="@+id/action_to_code"
+        app:destination="@id/code" />
 </navigation>

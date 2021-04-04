@@ -29,5 +29,6 @@
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
     <string name="title_settings">Settings</string>
+    <string name="msg_qr">Your business QR Code</string>
 
 </resources>

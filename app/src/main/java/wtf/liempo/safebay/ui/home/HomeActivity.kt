@@ -1,5 +1,6 @@
 package wtf.liempo.safebay.ui.home
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -11,6 +12,7 @@ import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.ActivityHomeBinding
 import wtf.liempo.safebay.models.HomeState
+import wtf.liempo.safebay.models.Type
 
 class HomeActivity : AppCompatActivity() {
 
@@ -46,9 +48,15 @@ class HomeActivity : AppCompatActivity() {
                         ContextCompat.getDrawable(
                             this, R.drawable.ic_help_24))
 
-                    // Change fragment
-                    controller.navigate(
-                        R.id.to_scan)
+                    // Get shared preferences
+                    val pref = getPreferences(
+                        Context.MODE_PRIVATE)
+
+                    // Change fragment based on type
+                    val actionId = when (vm.getType(pref)) {
+                        Type.STANDARD -> R.id.action_to_scan
+                        Type.BUSINESS -> R.id.action_to_code
+                    }; controller.navigate(actionId)
                 }
 
                 HomeState.LIST -> TODO()

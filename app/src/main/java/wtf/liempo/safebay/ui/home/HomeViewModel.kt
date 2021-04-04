@@ -1,5 +1,6 @@
 package wtf.liempo.safebay.ui.home
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,10 @@ import kotlinx.coroutines.launch
 import wtf.liempo.safebay.data.LogRepository
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
+import wtf.liempo.safebay.data.TypeRepository
 import wtf.liempo.safebay.models.HomeState
 import wtf.liempo.safebay.models.Log
+import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.utils.SingleLiveEvent
 
 class HomeViewModel : ViewModel() {
@@ -17,15 +20,15 @@ class HomeViewModel : ViewModel() {
     // Data Repositories
     private val profiles = ProfileRepository()
     private val logs = LogRepository()
+    private val types = TypeRepository()
 
     // Non-observable data, used internally
     private var processBarcode = true
-    private val guestId = profiles.getCurrentUserId()
-    private var businessId: String? = null
+    val currentUserId = profiles.getCurrentUserId()
+    private var scannedId: String? = null
 
     // Determines the state of the home activity
     private val _state = MutableLiveData<HomeState>()
-        .apply { value = HomeState.SCAN }
     val state: LiveData<HomeState> = _state
 
     // Initially null and when something is scanned
@@ -77,12 +80,12 @@ class HomeViewModel : ViewModel() {
 
         // Update the businessId of the profile
         // To be used later for startLogProfile
-        businessId = barcode
+        scannedId = barcode
     }
 
     fun clearDetectedProfile() {
         processBarcode = true
-        businessId = ""
+        scannedId = ""
     }
 
     fun startLogProfile() {
@@ -92,14 +95,14 @@ class HomeViewModel : ViewModel() {
         // This should not happen because
         // startLogProfile can only be called
         // if detectProfile successfully finished
-        if (businessId.isNullOrEmpty())
+        if (scannedId.isNullOrEmpty())
             return
 
         viewModelScope.launch {
             // Create the log data
             // and save to repository
             val data = Log(
-                guestId, businessId)
+                currentUserId, scannedId)
             logs.saveLog(data)
 
             // Notify UI that logging done
@@ -109,5 +112,8 @@ class HomeViewModel : ViewModel() {
             clearDetectedProfile()
         }
     }
+
+    fun getType(pref: SharedPreferences) =
+        types.getType(pref)
 
 }

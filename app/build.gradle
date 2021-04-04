@@ -68,10 +68,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
 
-    // QR code scanning using MLKit
+    // QR code scanning and generation
     implementation 'com.google.mlkit:barcode-scanning:16.1.1'
+    implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
 
-    // Logging and debugging
+// Logging and debugging
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Favorite third-party dependency ever, glide
