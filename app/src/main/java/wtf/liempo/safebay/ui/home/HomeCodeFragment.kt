@@ -33,7 +33,7 @@ class HomeCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vm.currentUserId?.let {
-           val bitmap =  QRGenerator.generate(requireContext(), it)
+           val bitmap =  QRGenerator.generate(it)
 
             Glide.with(binding.root)
                 .load(bitmap)
