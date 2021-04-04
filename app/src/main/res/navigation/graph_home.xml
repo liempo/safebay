@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph_home"
-    app:startDestination="@id/code">
+    app:startDestination="@id/dest_code">
 
     <fragment
-        android:id="@+id/scan"
+        android:id="@+id/dest_scan"
         android:name="wtf.liempo.safebay.ui.home.HomeScanFragment"
         android:label="fragment_home_scan"
         tools:layout="@layout/fragment_home_scan">
         <action
             android:id="@+id/action_confirm_scan"
-            app:destination="@id/confirm" />
+            app:destination="@id/dest_confirm" />
     </fragment>
     <dialog
-        android:id="@+id/confirm"
+        android:id="@+id/dest_confirm"
         android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
         android:label="fragment_home_confirm"
         tools:layout="@layout/fragment_home_confirm" >
@@ -27,17 +27,17 @@
     </dialog>
     <action
         android:id="@+id/action_to_scan"
-        app:destination="@id/scan" />
+        app:destination="@id/dest_scan" />
     <fragment
-        android:id="@+id/code"
+        android:id="@+id/dest_code"
         android:name="wtf.liempo.safebay.ui.home.HomeCodeFragment"
         android:label="fragment_home_code"
         tools:layout="@layout/fragment_home_code" >
         <action
             android:id="@+id/action_code_to_scan"
-            app:destination="@id/scan" />
+            app:destination="@id/dest_scan" />
     </fragment>
     <action
         android:id="@+id/action_to_code"
-        app:destination="@id/code" />
+        app:destination="@id/dest_code" />
 </navigation>

@@ -39,9 +39,9 @@ class AuthActivity : AppCompatActivity() {
             Timber.d("Phase: $it")
 
             val actionId = when (it) {
-                AuthState.LOGIN -> R.id.to_login
-                AuthState.PROFILE -> R.id.to_profile
-                AuthState.FINISH ->  R.id.to_home
+                AuthState.LOGIN -> R.id.action_to_login
+                AuthState.PROFILE -> R.id.action_to_profile
+                AuthState.FINISH ->  R.id.action_to_home
                 else -> return@observe
             }; controller.navigate(actionId)
         })
