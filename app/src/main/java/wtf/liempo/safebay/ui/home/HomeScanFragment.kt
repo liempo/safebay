@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeScanBinding
+import wtf.liempo.safebay.utils.BarcodeAnalyzer
 import wtf.liempo.safebay.utils.CameraUtils.getCameraProvider
 
 class HomeScanFragment : Fragment() {

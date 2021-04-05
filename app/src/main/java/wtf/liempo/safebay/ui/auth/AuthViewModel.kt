@@ -21,7 +21,7 @@ class AuthViewModel : ViewModel() {
     private val types = TypeRepository()
 
     // Non-observable data, used internally
-    private val uid: String?
+    private val currentUserId: String?
         get() = profiles.getCurrentUserId()
 
     // Determines the state of the authentication
@@ -31,7 +31,7 @@ class AuthViewModel : ViewModel() {
     fun startStateCheck() {
         viewModelScope.launch {
             _state.value =
-                if (!uid.isNullOrEmpty()) {
+                if (!currentUserId.isNullOrEmpty()) {
                     if (profiles.getCurrentProfile() != null)
                         AuthState.FINISH
                     else AuthState.PROFILE
@@ -57,7 +57,7 @@ class AuthViewModel : ViewModel() {
             // and imageUri must be verified before calling
             // startProfileCheck. Thank you, have a good day!
             val imageUri = images.uploadProfileImage(
-                uid!!, profile.imageUri!!)
+                currentUserId!!, profile.imageUri!!)
 
             val updated = profile.copy(
                 imageUri = imageUri)

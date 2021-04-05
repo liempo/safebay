@@ -6,26 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import wtf.liempo.safebay.data.ImageRepository
 import wtf.liempo.safebay.data.LogRepository
 import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 import wtf.liempo.safebay.data.TypeRepository
 import wtf.liempo.safebay.models.HomeState
 import wtf.liempo.safebay.models.Log
-import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.utils.SingleLiveEvent
 
 class HomeViewModel : ViewModel() {
 
     // Data Repositories
     private val profiles = ProfileRepository()
+    private val images = ImageRepository()
     private val logs = LogRepository()
     private val types = TypeRepository()
 
     // Non-observable data, used internally
-    private var processBarcode = true
-    val currentUserId = profiles.getCurrentUserId()
+    val currentUserId: String?
+        get() = profiles.getCurrentUserId()
     private var scannedId: String? = null
+    private var processBarcode = true
 
     // Determines the state of the home activity
     private val _state = MutableLiveData<HomeState>()
@@ -110,6 +112,24 @@ class HomeViewModel : ViewModel() {
 
             // Reset profile detection
             clearDetectedProfile()
+        }
+    }
+
+    fun startProfileUpdate(profile: Profile) {
+        viewModelScope.launch {
+            // Upload image to storage
+            // NOTE: I explicitly put a not null here
+            // because it at this point we have verified
+            // that uid is not null on startProfileCheck
+            // and imageUri must be verified before calling
+            // startProfileCheck. Thank you, have a good day!
+            val imageUri = images.uploadProfileImage(
+                currentUserId!!, profile.imageUri!!)
+
+            val updated = profile.copy(
+                imageUri = imageUri)
+
+            // TODO update edit/save state
         }
     }
 

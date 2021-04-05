@@ -6,38 +6,59 @@
     app:startDestination="@id/dest_code">
 
     <fragment
+        android:id="@+id/dest_code"
+        android:name="wtf.liempo.safebay.ui.home.HomeCodeFragment"
+        android:label="HomeCodeFragment"
+        tools:layout="@layout/fragment_home_code" >
+
+        <action
+            android:id="@+id/action_code_to_scan"
+            app:destination="@id/dest_scan" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/dest_scan"
         android:name="wtf.liempo.safebay.ui.home.HomeScanFragment"
-        android:label="fragment_home_scan"
+        android:label="HomeScanFragment"
         tools:layout="@layout/fragment_home_scan">
+
         <action
             android:id="@+id/action_confirm_scan"
             app:destination="@id/dest_confirm" />
+
     </fragment>
+
     <dialog
         android:id="@+id/dest_confirm"
         android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
-        android:label="fragment_home_confirm"
-        tools:layout="@layout/fragment_home_confirm" >
+        android:label="HomeConfirmFragment"
+        tools:layout="@layout/fragment_home_confirm">
+
         <argument
             android:name="profile"
             app:argType="wtf.liempo.safebay.models.Profile"
             app:nullable="true"
             android:defaultValue="@null" />
+
     </dialog>
+
+    <fragment
+        android:id="@+id/dest_settings"
+        android:name="wtf.liempo.safebay.ui.home.HomeSettingsFragment"
+        android:label="HomeSettingsFragment"
+        tools:layout="@layout/fragment_home_settings"/>
+
     <action
         android:id="@+id/action_to_scan"
         app:destination="@id/dest_scan" />
-    <fragment
-        android:id="@+id/dest_code"
-        android:name="wtf.liempo.safebay.ui.home.HomeCodeFragment"
-        android:label="fragment_home_code"
-        tools:layout="@layout/fragment_home_code" >
-        <action
-            android:id="@+id/action_code_to_scan"
-            app:destination="@id/dest_scan" />
-    </fragment>
+
     <action
         android:id="@+id/action_to_code"
         app:destination="@id/dest_code" />
+
+    <action
+        android:id="@+id/action_to_settings"
+        app:destination="@id/dest_settings" />
+
 </navigation>
