@@ -70,9 +70,10 @@ dependencies {
 
     // QR code scanning and generation
     implementation 'com.google.mlkit:barcode-scanning:16.1.1'
-    implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
+    implementation 'com.google.zxing:core:3.3.2'
 
-// Logging and debugging
+    // Logging and debugging
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Favorite third-party dependency ever, glide

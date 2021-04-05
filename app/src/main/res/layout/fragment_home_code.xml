@@ -16,6 +16,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/backgrounds/scenic"
-        android:contentDescription="@string/msg_qr" />
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_qr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/msg_qr"
+        android:textAlignment="center"
+        android:labelFor="@id/image_qr"
+        app:layout_constraintBottom_toTopOf="@+id/image_qr"
+        app:layout_constraintEnd_toEndOf="@+id/image_qr"
+        app:layout_constraintStart_toStartOf="@+id/image_qr" />
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/button_save_qr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/action_save"
+        app:layout_constraintEnd_toEndOf="@+id/image_qr"
+        app:layout_constraintStart_toStartOf="@+id/image_qr"
+        app:layout_constraintTop_toBottomOf="@+id/image_qr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

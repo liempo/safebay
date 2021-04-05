@@ -29,6 +29,9 @@
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
     <string name="title_settings">Settings</string>
-    <string name="msg_qr">Your business QR Code</string>
+    <string name="msg_qr">This QR code will be used by the users to log their information on your establishment.</string>
+    <string name="action_save">Save</string>
+    <string name="msg_success_qr_save">Successfully save QR Code.</string>
+    <string name="msg_error_qr_save">There was a problem saving the QR Code.</string>
 
 </resources>

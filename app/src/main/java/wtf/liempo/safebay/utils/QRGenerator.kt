@@ -1,23 +1,21 @@
 package wtf.liempo.safebay.utils
 
 import android.graphics.Bitmap
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.option.RenderOption
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import timber.log.Timber
 
 object QRGenerator {
 
     fun generate(value: String): Bitmap? {
 
-        val options = RenderOption().apply {
-            content = value
-            size = 768
-            borderWidth = 32
-            roundedPatterns = true
-        }
+        val encoder = QRGEncoder(
+            value,
+            QRGContents.Type.TEXT,
+            512)
 
         return try {
-            AwesomeQrRenderer.render(options).bitmap
+            encoder.bitmap
         } catch (e: Exception) {
             Timber.e(e, "Something went wrong while rendering QR.")
             return null
