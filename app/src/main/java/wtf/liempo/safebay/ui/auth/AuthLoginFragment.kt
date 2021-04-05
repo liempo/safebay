@@ -63,7 +63,9 @@ class AuthLoginFragment : Fragment() {
             .build()
 
         val pref = requireActivity()
-            .getPreferences(Context.MODE_PRIVATE)
+            .getSharedPreferences(
+                getString(R.string.app_name),
+                Context.MODE_PRIVATE)
         vm.setType(pref, startAsType)
 
         startActivityForResult(intent, RC_AUTH)

@@ -38,29 +38,44 @@ class HomeActivity : AppCompatActivity() {
             vm.setPrimaryState()
         }
 
+        binding.bar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_settings -> vm.setState(
+                    HomeState.SETTINGS)
+            }
+
+            true
+        }
+
+        // Get shared preferences
+        val pref = getSharedPreferences(
+                getString(R.string.app_name),
+                Context.MODE_PRIVATE)
+        val type = vm.getType(pref)
+
         vm.state.observe(this, {
             Timber.d("State: $it")
 
+            // Change fab icon based on state
+            val drawable = ContextCompat.getDrawable(this,
+                if (it == HomeState.SCAN)
+                    R.drawable.ic_help_24
+                else R.drawable.ic_qr_24
+            ); binding.fab.setImageDrawable(drawable)
+
             when (it) {
                 HomeState.SCAN -> {
-                    // Change fab icon to help
-                    binding.fab.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            this, R.drawable.ic_help_24))
-
-                    // Get shared preferences
-                    val pref = getPreferences(
-                        Context.MODE_PRIVATE)
-
                     // Change fragment based on type
-                    val actionId = when (vm.getType(pref)) {
+                    val actionId = when (type) {
                         Type.STANDARD -> R.id.action_to_scan
                         Type.BUSINESS -> R.id.action_to_code
                     }; controller.navigate(actionId)
                 }
 
                 HomeState.LIST -> TODO()
-                HomeState.SETTINGS -> TODO()
+                HomeState.SETTINGS -> {
+                    controller.navigate(R.id.action_to_settings)
+                }
 
                 else -> return@observe
             }
