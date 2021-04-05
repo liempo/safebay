@@ -79,7 +79,7 @@ class ProfileView : ConstraintLayout {
         if (imageUri.isNullOrEmpty()) {
             Snackbar.make(
                 this,
-                R.string.error_profile_image_empty,
+                R.string.msg_error_profile_image_empty,
                 Snackbar.LENGTH_SHORT)
                 .show()
             return null
