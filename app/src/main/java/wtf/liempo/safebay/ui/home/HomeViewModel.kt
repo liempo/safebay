@@ -31,6 +31,7 @@ class HomeViewModel : ViewModel() {
 
     // Determines the state of the home activity
     private val _state = MutableLiveData<HomeState>()
+        .apply { value = HomeState.SCAN }
     val state: LiveData<HomeState> = _state
 
     // Initially null and when something is scanned
