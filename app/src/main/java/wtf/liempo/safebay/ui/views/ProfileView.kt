@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.models.Address
 import wtf.liempo.safebay.models.Profile
@@ -27,6 +28,8 @@ class ProfileView : ConstraintLayout {
                 .load(value)
                 .into(binding.imageProfile)
         }
+
+    private var originalBoxStrokeWidth: Int = 0
 
     constructor(
         context: Context,
@@ -52,6 +55,56 @@ class ProfileView : ConstraintLayout {
         _binding = ViewProfileBinding.inflate(
             LayoutInflater.from(context),
             this, true)
+        originalBoxStrokeWidth = binding
+            .layoutName.boxStrokeWidth
+        val color = binding
+            .inputName.textColors
+            .defaultColor
+        setEditTextColor(
+            color,
+            binding.inputName,
+            binding.inputAddressLine1,
+            binding.inputAddressLine2,
+            binding.inputBrgy,
+            binding.inputCity,
+            binding.inputProvince
+        )
+    }
+
+    fun setEditEnabled(value: Boolean) {
+        binding.imageProfile
+            .isClickable = value
+        setLayoutEnabled(
+            value,
+            binding.layoutName,
+            binding.layoutAddressLine1,
+            binding.layoutAddressLine2,
+            binding.layoutBrgy,
+            binding.layoutCity,
+            binding.layoutProvince
+        )
+    }
+
+    private fun setLayoutEnabled(
+        value: Boolean,
+        vararg layouts: TextInputLayout
+    ) {
+        for (l in layouts) {
+            l.isEnabled = value
+            l.boxStrokeWidth =
+                if (value)
+                    originalBoxStrokeWidth
+                else 0
+        }
+    }
+
+
+    private fun setEditTextColor(
+        color: Int,
+        vararg layouts: TextInputEditText
+    ) {
+        for (l in layouts)
+            l.setTextColor(color)
     }
 
     fun setType(type: Type) {
@@ -74,6 +127,21 @@ class ProfileView : ConstraintLayout {
     fun setProfileImageClickListener(l: OnClickListener) =
         binding.imageProfile.setOnClickListener(l)
 
+    fun setProfile(profile: Profile) {
+        // Set details
+        imageUri = profile.imageUri
+        binding.inputName.setText(profile.name)
+
+        // Unwrap address
+        val address = profile.address ?: return
+
+        // Set address
+        binding.inputAddressLine1.setText(address.line1)
+        binding.inputAddressLine2.setText(address.line2)
+        binding.inputBrgy.setText(address.brgy)
+        binding.inputCity.setText(address.city)
+        binding.inputProvince.setText(address.province)
+    }
 
     fun toProfile(): Profile? {
         if (imageUri.isNullOrEmpty()) {
