@@ -34,5 +34,6 @@
     <string name="msg_qr">This QR code will be used by the users to log their information on your establishment.</string>
     <string name="msg_success_qr_save">Successfully save QR Code.</string>
     <string name="msg_error_qr_save">There was a problem saving the QR Code.</string>
+    <string name="action_done">Done</string>
 
 </resources>

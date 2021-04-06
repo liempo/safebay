@@ -43,6 +43,9 @@ class HomeViewModel : ViewModel() {
     private val _notification = SingleLiveEvent<String>()
     val notification: LiveData<String> = _notification
 
+    private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile> = _profile
+
     // Will be used to notify UI that information is Logged
     private val _logged = MutableLiveData<Boolean>()
     val logged: LiveData<Boolean> = _logged
@@ -118,19 +121,20 @@ class HomeViewModel : ViewModel() {
 
     fun startProfileUpdate(profile: Profile) {
         viewModelScope.launch {
-            // Upload image to storage
-            // NOTE: I explicitly put a not null here
-            // because it at this point we have verified
-            // that uid is not null on startProfileCheck
-            // and imageUri must be verified before calling
-            // startProfileCheck. Thank you, have a good day!
+
             val imageUri = images.uploadProfileImage(
                 currentUserId!!, profile.imageUri!!)
 
             val updated = profile.copy(
                 imageUri = imageUri)
 
-            // TODO update edit/save state
+            profiles.setCurrentProfile(updated)
+        }
+    }
+
+    fun startProfileFetch() {
+        viewModelScope.launch {
+            _profile.value = profiles.getCurrentProfile()
         }
     }
 

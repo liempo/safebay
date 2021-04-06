@@ -34,7 +34,10 @@ class HomeSettingsFragment : Fragment() {
 
         val pref = requireActivity()
             .getPreferences(Context.MODE_PRIVATE)
-        binding.profile.setType(vm.getType(pref))
+        binding.profile.apply {
+            setEditEnabled(false)
+            setType(vm.getType(pref))
+        }
 
         // We gotta implement the image chooser here
         // because there's no way a custom view can
@@ -44,6 +47,32 @@ class HomeSettingsFragment : Fragment() {
                 .apply { type = "image/*" }
             startActivityForResult(intent, RC_PICKER)
         }
+
+        binding.buttonEdit.setOnClickListener {
+            binding.profile.setEditEnabled(true)
+            binding.groupEdit.visibility = View.VISIBLE
+            binding.buttonEdit.visibility = View.INVISIBLE
+        }
+
+        binding.buttonCancel.setOnClickListener {
+            binding.profile.setEditEnabled(false)
+            binding.groupEdit.visibility = View.INVISIBLE
+            binding.buttonEdit.visibility = View.VISIBLE
+        }
+
+        binding.buttonDone.setOnClickListener {
+            binding.profile.setEditEnabled(false)
+            binding.groupEdit.visibility = View.INVISIBLE
+            binding.buttonEdit.visibility = View.VISIBLE
+
+            // Start upload
+            vm.startProfileUpdate(binding.profile.toProfile()!!)
+        }
+
+        vm.startProfileFetch()
+        vm.profile.observe(viewLifecycleOwner, {
+            binding.profile.setProfile(it)
+        })
 
     }
 

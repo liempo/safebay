@@ -20,19 +20,17 @@
             app:layout_constraintTop_toTopOf="@+id/guideline_top" />
 
         <Button
-            android:id="@+id/button_edit_or_done"
-            android:layout_width="0dp"
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="32dp"
             android:text="@string/action_edit"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_center_v"
             app:layout_constraintTop_toBottomOf="@+id/profile" />
 
         <Button
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:id="@+id/button_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -40,6 +38,17 @@
             android:text="@string/action_cancel"
             app:layout_constraintEnd_toStartOf="@+id/guideline_center_v"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/profile" />
+
+        <Button
+            android:id="@+id/button_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/action_done"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_center_v"
             app:layout_constraintTop_toBottomOf="@+id/profile" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -69,6 +78,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="button_cancel,button_done" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
