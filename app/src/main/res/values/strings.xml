@@ -21,7 +21,7 @@
     <string name="action_sign_up">Finish</string>
 
     <!-- HomeActivity -->
-    <string name="title_trace">Trace Logs</string>
+    <string name="title_logs">Trace Logs</string>
     <string name="title_settings">Settings</string>
     <string name="action_edit">Edit</string>
     <string name="action_save">Save</string>

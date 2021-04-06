@@ -5,5 +5,5 @@ enum class HomeState {
     SCAN, HELP,
 
     // Secondary
-    LIST, SETTINGS
+    LOGS, SETTINGS
 }

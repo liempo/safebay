@@ -60,5 +60,13 @@
     <action
         android:id="@+id/action_to_settings"
         app:destination="@id/dest_settings" />
+    <fragment
+        android:id="@+id/dest_logs"
+        android:name="wtf.liempo.safebay.ui.home.HomeLogsFragment"
+        android:label="HomeLogsFragment"
+        tools:layout="@layout/fragment_home_logs" />
+    <action
+        android:id="@+id/action_to_logs"
+        app:destination="@id/dest_logs" />
 
 </navigation>

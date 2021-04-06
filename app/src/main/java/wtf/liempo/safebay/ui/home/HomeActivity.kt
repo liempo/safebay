@@ -42,6 +42,9 @@ class HomeActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_settings -> vm.setState(
                     HomeState.SETTINGS)
+                R.id.menu_logs -> vm.setState(
+                    HomeState.LOGS
+                )
             }
 
             true
@@ -72,10 +75,10 @@ class HomeActivity : AppCompatActivity() {
                     }; controller.navigate(actionId)
                 }
 
-                HomeState.LIST -> TODO()
-                HomeState.SETTINGS -> {
+                HomeState.LOGS ->
+                    controller.navigate(R.id.action_to_logs)
+                HomeState.SETTINGS ->
                     controller.navigate(R.id.action_to_settings)
-                }
 
                 else -> return@observe
             }
