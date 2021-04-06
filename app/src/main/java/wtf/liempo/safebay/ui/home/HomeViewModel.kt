@@ -6,15 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import wtf.liempo.safebay.data.ImageRepository
 import wtf.liempo.safebay.data.LogRepository
-import wtf.liempo.safebay.models.Profile
 import wtf.liempo.safebay.data.ProfileRepository
 import wtf.liempo.safebay.data.TypeRepository
-import wtf.liempo.safebay.models.HomeState
-import wtf.liempo.safebay.models.Log
-import wtf.liempo.safebay.models.Type
+import wtf.liempo.safebay.models.*
 import wtf.liempo.safebay.utils.SingleLiveEvent
 
 class HomeViewModel : ViewModel() {
@@ -47,6 +43,9 @@ class HomeViewModel : ViewModel() {
 
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile> = _profile
+
+    private val _list = MutableLiveData<List<LogUnwrapped>>()
+    val list: LiveData<List<LogUnwrapped>> = _list
 
     // Will be used to notify UI that information is Logged
     private val _logged = MutableLiveData<Boolean>()
@@ -146,8 +145,29 @@ class HomeViewModel : ViewModel() {
     fun startLogsFetch(type: Type) {
         viewModelScope.launch {
             val logs = logs.getLogs(type, currentUserId!!)
+            val unwrappedList = mutableListOf<LogUnwrapped>()
 
-            Timber.d("Log Count = ${logs.size}")
+            for (log in logs) {
+                val date = log.date ?: continue
+
+                // Unwrap
+                val uid = when (type) {
+                    Type.STANDARD -> log.businessId
+                    Type.BUSINESS -> log.guestId
+                } ?: continue
+
+                // Get the profile
+                val profile = profiles.getProfile(uid) ?: continue
+
+
+                unwrappedList.add(
+                    LogUnwrapped(profile, date)
+                )
+
+            }
+
+            // Notify observers
+            _list.value = unwrappedList
         }
     }
 }
