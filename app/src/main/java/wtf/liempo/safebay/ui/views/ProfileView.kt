@@ -31,6 +31,7 @@ class ProfileView : ConstraintLayout {
 
     private var originalBoxStrokeWidth: Int = 0
     private var profileImageOnClick: OnClickListener? = null
+    private var isEditEnabled = false
 
     constructor(
         context: Context,
@@ -73,6 +74,7 @@ class ProfileView : ConstraintLayout {
     }
 
     fun setEditEnabled(value: Boolean) {
+        isEditEnabled = value
         binding.imageProfile
             .isClickable = value
         binding.imageProfile.setOnClickListener(
@@ -131,7 +133,8 @@ class ProfileView : ConstraintLayout {
 
     fun setProfileImageClickListener(l: OnClickListener) {
         profileImageOnClick = l
-        binding.imageProfile.setOnClickListener(profileImageOnClick)
+        binding.imageProfile.setOnClickListener(
+            if (isEditEnabled) profileImageOnClick else null)
     }
 
     fun setProfile(profile: Profile) {

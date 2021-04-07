@@ -121,11 +121,15 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun startProfileUpdate(profile: Profile) {
+    fun startProfileUpdate(profile: Profile, skipImage: Boolean = false) {
         viewModelScope.launch {
 
-            val imageUri = images.uploadProfileImage(
-                currentUserId!!, profile.imageUri!!)
+            val imageUri =
+                if (skipImage)
+                    images.uploadProfileImage(
+                        currentUserId!!,
+                        profile.imageUri!!)
+                else profile.imageUri!!
 
             val updated = profile.copy(
                 imageUri = imageUri)
