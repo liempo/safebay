@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import timber.log.Timber
+import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeLogsBinding
 
 
@@ -42,13 +44,16 @@ class HomeLogsFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        val pref = requireActivity()
-            .getPreferences(Context.MODE_PRIVATE)
+        val pref = requireActivity().
+            getSharedPreferences(
+                getString(R.string.app_name),
+                Context.MODE_PRIVATE)
         val type = vm.getType(pref)
 
         vm.startLogsFetch(type)
         vm.list.observe(viewLifecycleOwner, {
             adapter.items = it
+            adapter.notifyDataSetChanged()
         })
 
     }

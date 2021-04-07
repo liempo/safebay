@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import wtf.liempo.safebay.data.ImageRepository
 import wtf.liempo.safebay.data.LogRepository
 import wtf.liempo.safebay.data.ProfileRepository
@@ -144,10 +145,14 @@ class HomeViewModel : ViewModel() {
 
     fun startLogsFetch(type: Type) {
         viewModelScope.launch {
+            Timber.d("Fetching logs for $currentUserId as $type")
+
             val logs = logs.getLogs(type, currentUserId!!)
+            Timber.d("Logs fetched: ${logs.size}")
             val unwrappedList = mutableListOf<LogUnwrapped>()
 
             for (log in logs) {
+                Timber.d("Unwrapping Log $log")
                 val date = log.date ?: continue
 
                 // Unwrap
@@ -157,17 +162,15 @@ class HomeViewModel : ViewModel() {
                 } ?: continue
 
                 // Get the profile
-                val profile = profiles.getProfile(uid) ?: continue
+                val profile = profiles
+                    .getProfile(uid) ?: continue
+                val unwrapped = LogUnwrapped(
+                    profile, date)
+                unwrappedList.add(unwrapped)
 
-
-                unwrappedList.add(
-                    LogUnwrapped(profile, date)
-                )
-
+                // Notify observers
+                _list.value = unwrappedList
             }
-
-            // Notify observers
-            _list.value = unwrappedList
         }
     }
 }
