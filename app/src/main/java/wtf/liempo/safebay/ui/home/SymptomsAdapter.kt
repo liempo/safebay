@@ -12,6 +12,11 @@ import wtf.liempo.safebay.models.Symptom
 class SymptomsAdapter : RecyclerView.Adapter<SymptomsAdapter.ViewHolder>() {
 
     var items = listOf<Symptom>()
+    private var onCompleteListener: ((List<Symptom>) -> Unit)? = null
+
+    fun setOnCompleteListener(l: ((List<Symptom>) -> Unit)) {
+        onCompleteListener = l
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,6 +41,10 @@ class SymptomsAdapter : RecyclerView.Adapter<SymptomsAdapter.ViewHolder>() {
                 R.id.button_no -> false
                 else -> false
             }
+
+            // Check if all are answered
+            if (items.all { it.present != null })
+                onCompleteListener?.invoke(items)
         }
     }
 

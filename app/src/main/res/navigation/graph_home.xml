@@ -49,6 +49,32 @@
         android:label="HomeSettingsFragment"
         tools:layout="@layout/fragment_home_settings"/>
 
+    <fragment
+        android:id="@+id/dest_logs"
+        android:name="wtf.liempo.safebay.ui.home.HomeLogsFragment"
+        android:label="HomeLogsFragment"
+        tools:layout="@layout/fragment_home_logs" />
+
+    <fragment
+        android:id="@+id/dest_symptoms"
+        android:name="wtf.liempo.safebay.ui.home.HomeSymptomsFragment"
+        android:label="HomeSymptomsFragment"
+        tools:layout="@layout/fragment_home_symptoms" >
+        <action
+            android:id="@+id/action_symptoms_result"
+            app:destination="@id/dest_result" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dest_result"
+        android:name="wtf.liempo.safebay.ui.home.HomeResultFragment"
+        android:label="HomeResultFragment"
+        tools:layout="@layout/fragment_home_result">
+        <argument
+            android:name="result"
+            app:argType="wtf.liempo.safebay.models.SymptomResult" />
+    </dialog>
+
     <action
         android:id="@+id/action_to_scan"
         app:destination="@id/dest_scan" />
@@ -60,19 +86,11 @@
     <action
         android:id="@+id/action_to_settings"
         app:destination="@id/dest_settings" />
-    <fragment
-        android:id="@+id/dest_logs"
-        android:name="wtf.liempo.safebay.ui.home.HomeLogsFragment"
-        android:label="HomeLogsFragment"
-        tools:layout="@layout/fragment_home_logs" />
+
     <action
         android:id="@+id/action_to_logs"
         app:destination="@id/dest_logs" />
-    <fragment
-        android:id="@+id/dest_symptoms"
-        android:name="wtf.liempo.safebay.ui.home.HomeSymptomsFragment"
-        android:label="HomeSymptomsFragment"
-        tools:layout="@layout/fragment_home_symptoms" />
+
     <action
         android:id="@+id/action_to_symptoms"
         app:destination="@id/dest_symptoms" />

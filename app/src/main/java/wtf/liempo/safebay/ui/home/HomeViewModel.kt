@@ -36,10 +36,6 @@ class HomeViewModel : ViewModel() {
     private val _detected = SingleLiveEvent<Profile>()
     val detected: LiveData<Profile> = _detected
 
-    // Will be used to send notifications to activity
-    private val _notification = SingleLiveEvent<String>()
-    val notification: LiveData<String> = _notification
-
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile> = _profile
 
@@ -184,5 +180,20 @@ class HomeViewModel : ViewModel() {
             Timber.d("Fetching list of symptoms")
             _listSymptoms.value = symptoms.getSymptoms()
         }
+    }
+
+    fun computeResult(updated: List<Symptom>): SymptomResult {
+        var totalSymptomsPresent = 0
+        updated.forEach {
+            if (it.present == true)
+                totalSymptomsPresent ++
+        }
+
+        if (totalSymptomsPresent <= 1)
+            return SymptomResult.LOW
+        @Suppress("LiftReturnOrAssignment")
+        if (totalSymptomsPresent <= updated.size / 2)
+            return SymptomResult.WARNING
+        else return SymptomResult.CRITICAL
     }
 }
