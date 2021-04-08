@@ -75,6 +75,8 @@ class HomeActivity : AppCompatActivity() {
                     }; controller.navigate(actionId)
                 }
 
+                HomeState.HELP ->
+                    controller.navigate(R.id.action_to_symptoms)
                 HomeState.LOGS ->
                     controller.navigate(R.id.action_to_logs)
                 HomeState.SETTINGS ->

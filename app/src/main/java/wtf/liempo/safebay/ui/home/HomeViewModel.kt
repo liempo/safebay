@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import wtf.liempo.safebay.data.ImageRepository
-import wtf.liempo.safebay.data.LogRepository
-import wtf.liempo.safebay.data.ProfileRepository
-import wtf.liempo.safebay.data.TypeRepository
+import wtf.liempo.safebay.data.*
 import wtf.liempo.safebay.models.*
 import wtf.liempo.safebay.utils.SingleLiveEvent
 
@@ -21,6 +18,7 @@ class HomeViewModel : ViewModel() {
     private val images = ImageRepository()
     private val logs = LogRepository()
     private val types = TypeRepository()
+    private val symptoms = SymptomRepository()
 
     // Non-observable data, used internally
     val currentUserId: String?
@@ -47,6 +45,9 @@ class HomeViewModel : ViewModel() {
 
     private val _listLogs = MutableLiveData<List<LogUnwrapped>>()
     val listLogs: LiveData<List<LogUnwrapped>> = _listLogs
+
+    private val _listSymptoms = MutableLiveData<List<Symptom>>()
+    val listSymptoms: LiveData<List<Symptom>> = _listSymptoms
 
     // Will be used to notify UI that information is Logged
     private val _logged = MutableLiveData<Boolean>()
@@ -175,6 +176,13 @@ class HomeViewModel : ViewModel() {
                 // Notify observers
                 _listLogs.value = unwrappedList
             }
+        }
+    }
+
+    fun startSymptomsFetch() {
+        viewModelScope.launch {
+            Timber.d("Fetching list of symptoms")
+            _listSymptoms.value = symptoms.getSymptoms()
         }
     }
 }

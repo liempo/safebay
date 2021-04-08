@@ -68,5 +68,13 @@
     <action
         android:id="@+id/action_to_logs"
         app:destination="@id/dest_logs" />
+    <fragment
+        android:id="@+id/dest_symptoms"
+        android:name="wtf.liempo.safebay.ui.home.HomeSymptomsFragment"
+        android:label="HomeSymptomsFragment"
+        tools:layout="@layout/fragment_home_symptoms" />
+    <action
+        android:id="@+id/action_to_symptoms"
+        app:destination="@id/dest_symptoms" />
 
 </navigation>
