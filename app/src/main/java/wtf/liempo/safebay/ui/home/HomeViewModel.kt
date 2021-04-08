@@ -45,8 +45,8 @@ class HomeViewModel : ViewModel() {
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile> = _profile
 
-    private val _list = MutableLiveData<List<LogUnwrapped>>()
-    val list: LiveData<List<LogUnwrapped>> = _list
+    private val _listLogs = MutableLiveData<List<LogUnwrapped>>()
+    val listLogs: LiveData<List<LogUnwrapped>> = _listLogs
 
     // Will be used to notify UI that information is Logged
     private val _logged = MutableLiveData<Boolean>()
@@ -173,7 +173,7 @@ class HomeViewModel : ViewModel() {
                 unwrappedList.add(unwrapped)
 
                 // Notify observers
-                _list.value = unwrappedList
+                _listLogs.value = unwrappedList
             }
         }
     }
