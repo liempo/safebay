@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_logs"
         android:title="@string/title_logs"
-        android:icon="@drawable/ic_connect_24"
+        android:icon="@drawable/ic_scroll_24"
         app:showAsAction="always" />
 
     <item
