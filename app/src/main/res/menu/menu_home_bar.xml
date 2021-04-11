@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_logout"
+        android:title="@string/title_logout"
+        android:icon="@drawable/ic_exit_24"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_logs"
         android:title="@string/title_logs"
         android:icon="@drawable/ic_scroll_24"
@@ -13,4 +19,6 @@
         android:title="@string/title_settings"
         android:icon="@drawable/ic_settings_24"
         app:showAsAction="ifRoom" />
+
+
 </menu>

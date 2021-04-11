@@ -40,5 +40,6 @@
     <string name="msg_symptoms_low">You have a low chance of having COVID-19 virus right now. Please stay safe!</string>
     <string name="msg_symptoms_warning">You could be infected right now. To be sure, stay at home and contact medical help. Keep yourself healthy!</string>
     <string name="msg_symptoms_critical">Please contact health authorities and take precautions by isolating yourself.</string>
+    <string name="title_logout">Logout</string>
 
 </resources>

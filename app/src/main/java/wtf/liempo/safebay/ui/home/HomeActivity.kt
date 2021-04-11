@@ -40,6 +40,11 @@ class HomeActivity : AppCompatActivity() {
 
         binding.bar.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.menu_logout -> {
+                    vm.signOut()
+                    finish()
+                }
+
                 R.id.menu_settings -> vm.setState(
                     HomeState.SETTINGS)
                 R.id.menu_logs -> vm.setState(

@@ -43,4 +43,6 @@ class ProfileRepository {
         } catch (e: FirebaseException) { false }
     }
 
+    fun signOut() = Firebase.auth.signOut()
+
 }

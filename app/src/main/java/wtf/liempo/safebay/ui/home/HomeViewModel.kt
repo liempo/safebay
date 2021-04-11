@@ -196,4 +196,8 @@ class HomeViewModel : ViewModel() {
             return SymptomResult.WARNING
         else return SymptomResult.CRITICAL
     }
+
+    fun signOut() {
+        profiles.signOut()
+    }
 }

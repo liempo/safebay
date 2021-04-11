@@ -34,7 +34,6 @@
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
         app:menu="@menu/menu_home_bar"
-        app:navigationIcon="@drawable/ic_menu_24"
         app:fabAlignmentMode="end"
         app:fabCradleMargin="16dp"
         app:fabCradleRoundedCornerRadius="24dp"/>
