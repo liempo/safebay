@@ -31,7 +31,7 @@ class ProfileView : ConstraintLayout {
 
     private var originalBoxStrokeWidth: Int = 0
     private var profileImageOnClick: OnClickListener? = null
-    private var isEditEnabled = false
+    private var isEditEnabled = true
 
     constructor(
         context: Context,
