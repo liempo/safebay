@@ -141,6 +141,7 @@ class ProfileView : ConstraintLayout {
         // Set details
         imageUri = profile.imageUri
         binding.inputName.setText(profile.name)
+        binding.inputAge.setText(profile.age)
 
         // Unwrap address
         val address = profile.address ?: return
@@ -165,6 +166,7 @@ class ProfileView : ConstraintLayout {
 
         return try {
             val name = binding.inputName.getInput(true)
+            val age = binding.inputAge.getInput(true).toInt()
             val address = Address(
                 binding.inputAddressLine1.getInput(true),
                 binding.inputAddressLine2.getInput(),
@@ -172,7 +174,7 @@ class ProfileView : ConstraintLayout {
                 binding.inputCity.getInput(true),
                 binding.inputProvince.getInput(true))
 
-            Profile(name, imageUri, address)
+            Profile(name, age, imageUri, address)
         } catch (e: RequiredFieldEmptyException) { null }
     }
 
