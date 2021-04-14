@@ -158,7 +158,7 @@ class ProfileView : ConstraintLayout {
         // Set details
         imageUri = profile.imageUri
         binding.inputName.setText(profile.name)
-        binding.inputAge.setText(profile.age)
+        binding.inputAge.setText(profile.age.toString())
         binding.inputSex.setText(profile.sex)
 
         // Unwrap address
