@@ -31,6 +31,16 @@ class ProfileRepository {
         } catch (e: FirebaseException) { null }
     }
 
+    suspend fun addAnonymousProfile(profile: Profile): String? {
+        return try {
+            val ref = collection
+                .document()
+            ref.set(profile)
+                .await()
+            ref.id
+        } catch (e: FirebaseException) { null }
+    }
+
     suspend fun setCurrentProfile(update: Profile): Boolean {
         val uid = getCurrentUserId() ?: return false
 

@@ -118,15 +118,34 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun startProfileUpdate(profile: Profile, skipImage: Boolean = false) {
+    fun startProfileCreateAndLog(profile: Profile) {
+        viewModelScope.launch {
+            _logged.value = false
+
+            val anonId = profiles.addAnonymousProfile(profile)
+
+            // the created profile with its id
+            // and the id of the current user
+            // since this would only be called
+            // when Type is BUSINESS
+            val log = Log(anonId, currentUserId)
+
+            logs.saveLog(log)
+            _logged.value = true
+        }
+    }
+
+    fun startProfileUpdate(profile: Profile, skipImageUpdate: Boolean = false) {
         viewModelScope.launch {
 
+            // TODO potential bug fix this
             val imageUri =
-                if (skipImage)
+                if (skipImageUpdate)
+                    profile.imageUri!!
+                else
                     images.uploadProfileImage(
                         currentUserId!!,
                         profile.imageUri!!)
-                else profile.imageUri!!
 
             val updated = profile.copy(
                 imageUri = imageUri)

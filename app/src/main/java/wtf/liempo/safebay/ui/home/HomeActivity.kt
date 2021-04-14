@@ -3,6 +3,7 @@ package wtf.liempo.safebay.ui.home
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -20,6 +21,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var controller: NavController
     private lateinit var binding: ActivityHomeBinding
 
+    private lateinit var type: Type
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +37,15 @@ class HomeActivity : AppCompatActivity() {
                 as NavHostFragment)
             .navController
 
+        // Get shared preferences
+        val pref = getSharedPreferences(
+            getString(R.string.app_name),
+            Context.MODE_PRIVATE)
+        type = vm.getType(pref)
+
+        // Set actionbar after init of type
+        setSupportActionBar(binding.bar)
+
         binding.fab.setOnClickListener {
             vm.setPrimaryState()
         }
@@ -45,21 +57,16 @@ class HomeActivity : AppCompatActivity() {
                     finish()
                 }
 
+                R.id.menu_manual -> vm.setState(
+                    HomeState.MANUAL)
                 R.id.menu_settings -> vm.setState(
                     HomeState.SETTINGS)
                 R.id.menu_logs -> vm.setState(
-                    HomeState.LOGS
-                )
+                    HomeState.LOGS)
             }
 
             true
         }
-
-        // Get shared preferences
-        val pref = getSharedPreferences(
-                getString(R.string.app_name),
-                Context.MODE_PRIVATE)
-        val type = vm.getType(pref)
 
         vm.state.observe(this, {
             Timber.d("State: $it")
@@ -80,6 +87,8 @@ class HomeActivity : AppCompatActivity() {
                     }; controller.navigate(actionId)
                 }
 
+                HomeState.MANUAL ->
+                    controller.navigate(R.id.action_to_manual)
                 HomeState.HELP ->
                     controller.navigate(R.id.action_to_symptoms)
                 HomeState.LOGS ->
@@ -90,5 +99,18 @@ class HomeActivity : AppCompatActivity() {
                 else -> return@observe
             }
         })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Timber.d("Type: $type")
+        menu?.findItem(R.id.menu_manual)?.
+            isVisible = type == Type.BUSINESS
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_home_bar, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

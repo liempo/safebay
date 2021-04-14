@@ -15,6 +15,13 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/menu_manual"
+        android:title="@string/title_manual"
+        android:visible="false"
+        android:icon="@drawable/ic_add_24"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_settings"
         android:title="@string/title_settings"
         android:icon="@drawable/ic_settings_24"

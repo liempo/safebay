@@ -94,5 +94,12 @@
     <action
         android:id="@+id/action_to_symptoms"
         app:destination="@id/dest_symptoms" />
+    <fragment
+        android:id="@+id/dest_manual"
+        android:name="wtf.liempo.safebay.ui.home.HomeManualFragment"
+        android:label="HomeManualFragment" />
+    <action
+        android:id="@+id/action_to_manual"
+        app:destination="@id/dest_manual" />
 
 </navigation>

@@ -43,5 +43,6 @@
     <string name="title_logout">Logout</string>
     <string name="msg_input_age">Age</string>
     <string name="msg_input_sex">Sex</string>
+    <string name="title_manual">Manual</string>
 
 </resources>

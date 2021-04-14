@@ -67,6 +67,7 @@ class ProfileView : ConstraintLayout {
         setEditTextColor(
             color,
             binding.inputName,
+            binding.inputAge,
             binding.inputAddressLine1,
             binding.inputAddressLine2,
             binding.inputBrgy,
@@ -82,6 +83,17 @@ class ProfileView : ConstraintLayout {
         binding.inputSex.inputType = 0
         binding.inputSex.setAdapter(adapter)
 
+    }
+
+    fun clear() {
+        binding.inputName.setText("")
+        binding.inputAge.setText("")
+        binding.inputSex.setText("")
+        binding.inputAddressLine1.setText("")
+        binding.inputAddressLine2.setText("")
+        binding.inputBrgy.setText("")
+        binding.inputCity.setText("")
+        binding.inputProvince.setText("")
     }
 
     fun setEditEnabled(value: Boolean) {
