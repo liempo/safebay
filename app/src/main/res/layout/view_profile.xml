@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +10,11 @@
         android:id="@+id/image_profile"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:contentDescription="@string/msg_profile_image"
         android:src="@drawable/ic_person_24"
         app:layout_constraintBottom_toBottomOf="@+id/layout_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/layout_name"
-        android:contentDescription="@string/msg_profile_image" />
+        app:layout_constraintTop_toTopOf="@+id/layout_name" />
 
     <TextView
         android:id="@+id/title_details"
@@ -37,7 +36,7 @@
         android:layout_marginTop="16dp"
         android:hint="@string/msg_input_name"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end_v"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_profile"
         app:layout_constraintTop_toBottomOf="@+id/title_details">
 
@@ -56,9 +55,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/msg_input_age"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/layout_name"
-        app:layout_constraintTop_toTopOf="@+id/layout_name">
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center_v"
+        app:layout_constraintStart_toStartOf="@+id/layout_name"
+        app:layout_constraintTop_toBottomOf="@+id/layout_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_age"
@@ -66,6 +65,25 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_sex"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/msg_input_sex"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_age"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_center_v"
+        app:layout_constraintTop_toBottomOf="@+id/layout_name">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/input_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,16 +101,16 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_age" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/layout_address_line_1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/msg_input_address_line_1"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/title_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_address">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_address_line_1"
@@ -103,15 +121,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/layout_address_line_2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/msg_input_address_line_2"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_address_line_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_address_line_1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_address_line_2"
@@ -122,15 +140,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/layout_brgy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/msg_input_brgy"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_address_line_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_address_line_2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_brgy"
@@ -141,8 +159,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/layout_city"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -161,8 +179,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/layout_province"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -187,12 +205,11 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end_v"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/other_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:constraint_referenced_ids="layout_sex,layout_age" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

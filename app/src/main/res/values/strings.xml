@@ -42,5 +42,6 @@
     <string name="msg_symptoms_critical">Please contact health authorities and take precautions by isolating yourself.</string>
     <string name="title_logout">Logout</string>
     <string name="msg_input_age">Age</string>
+    <string name="msg_input_sex">Sex</string>
 
 </resources>

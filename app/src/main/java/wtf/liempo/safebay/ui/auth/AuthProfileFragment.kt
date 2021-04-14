@@ -42,7 +42,6 @@ class AuthProfileFragment : Fragment() {
         // intercept a startActivityForResult
         binding.profile.setProfileImageClickListener {
             ImagePicker.Companion.with(this)
-                .cameraOnly()
                 .start()
         }
 

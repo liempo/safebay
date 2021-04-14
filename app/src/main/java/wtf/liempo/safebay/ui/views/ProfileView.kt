@@ -3,6 +3,8 @@ package wtf.liempo.safebay.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.ArrayAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -71,6 +73,15 @@ class ProfileView : ConstraintLayout {
             binding.inputCity,
             binding.inputProvince
         )
+
+        val adapter = ArrayAdapter(
+            context,
+            android.R.layout.select_dialog_item,
+            listOf("Male", "Female")
+        )
+        binding.inputSex.inputType = 0
+        binding.inputSex.setAdapter(adapter)
+
     }
 
     fun setEditEnabled(value: Boolean) {
@@ -84,6 +95,8 @@ class ProfileView : ConstraintLayout {
         setLayoutEnabled(
             value,
             binding.layoutName,
+            binding.layoutAge,
+            binding.layoutSex,
             binding.layoutAddressLine1,
             binding.layoutAddressLine2,
             binding.layoutBrgy,
@@ -121,12 +134,16 @@ class ProfileView : ConstraintLayout {
                     context.getString(R.string.title_details_standard)
                 binding.titleAddress.text =
                     context.getString(R.string.title_address_standard)
+                binding.otherDetails
+                    .visibility = View.VISIBLE
             }
             Type.BUSINESS -> {
                 binding.titleDetails.text =
                     context.getString(R.string.title_details_business)
                 binding.titleAddress.text =
                     context.getString(R.string.title_address_business)
+                binding.otherDetails
+                    .visibility = View.GONE
             }
         }
     }
@@ -142,6 +159,7 @@ class ProfileView : ConstraintLayout {
         imageUri = profile.imageUri
         binding.inputName.setText(profile.name)
         binding.inputAge.setText(profile.age)
+        binding.inputSex.setText(profile.sex)
 
         // Unwrap address
         val address = profile.address ?: return
@@ -166,7 +184,8 @@ class ProfileView : ConstraintLayout {
 
         return try {
             val name = binding.inputName.getInput(true)
-            val age = binding.inputAge.getInput(true).toInt()
+            val age = binding.inputAge.getInput(false).toInt()
+            val sex = binding.inputSex.text.toString()
             val address = Address(
                 binding.inputAddressLine1.getInput(true),
                 binding.inputAddressLine2.getInput(),
@@ -174,7 +193,7 @@ class ProfileView : ConstraintLayout {
                 binding.inputCity.getInput(true),
                 binding.inputProvince.getInput(true))
 
-            Profile(name, age, imageUri, address)
+            Profile(name, age, sex, imageUri, address)
         } catch (e: RequiredFieldEmptyException) { null }
     }
 
