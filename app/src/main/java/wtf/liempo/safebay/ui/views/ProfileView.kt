@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -22,6 +23,16 @@ class ProfileView : ConstraintLayout {
     private val binding get() = _binding!!
 
     private var _imageUri: String? = null
+
+    private var _phone: String? = null
+    var phone: String?
+        get() =  _phone
+        set(value) {
+            _phone = value
+            binding.inputPhone.setText(value)
+            binding.inputPhone.isEnabled = false
+        }
+
     var imageUri: String?
         get() = _imageUri
         set(value) {
@@ -67,7 +78,9 @@ class ProfileView : ConstraintLayout {
         setEditTextColor(
             color,
             binding.inputName,
+            binding.inputPhone,
             binding.inputAge,
+            binding.inputSex,
             binding.inputAddressLine1,
             binding.inputAddressLine2,
             binding.inputBrgy,
@@ -87,6 +100,7 @@ class ProfileView : ConstraintLayout {
 
     fun clear() {
         binding.inputName.setText("")
+        binding.inputPhone.setText("")
         binding.inputAge.setText("")
         binding.inputSex.setText("")
         binding.inputAddressLine1.setText("")
@@ -107,6 +121,7 @@ class ProfileView : ConstraintLayout {
         setLayoutEnabled(
             value,
             binding.layoutName,
+            binding.layoutPhone,
             binding.layoutAge,
             binding.layoutSex,
             binding.layoutAddressLine1,
@@ -133,9 +148,9 @@ class ProfileView : ConstraintLayout {
 
     private fun setEditTextColor(
         color: Int,
-        vararg layouts: TextInputEditText
+        vararg editTexts: EditText
     ) {
-        for (l in layouts)
+        for (l in editTexts)
             l.setTextColor(color)
     }
 
@@ -170,6 +185,7 @@ class ProfileView : ConstraintLayout {
         // Set details
         imageUri = profile.imageUri
         binding.inputName.setText(profile.name)
+        binding.inputPhone.setText(profile.phone)
         binding.inputAge.setText(profile.age.toString())
         binding.inputSex.setText(profile.sex)
 
@@ -196,6 +212,7 @@ class ProfileView : ConstraintLayout {
 
         return try {
             val name = binding.inputName.getInput(true)
+            val phone = binding.inputPhone.getInput(true)
             val age = binding.inputAge.getInput(false).toInt()
             val sex = binding.inputSex.text.toString()
             val address = Address(
@@ -205,7 +222,7 @@ class ProfileView : ConstraintLayout {
                 binding.inputCity.getInput(true),
                 binding.inputProvince.getInput(true))
 
-            Profile(name, age, sex, imageUri, address)
+            Profile(name, phone, age, sex, imageUri, address)
         } catch (e: RequiredFieldEmptyException) { null }
     }
 

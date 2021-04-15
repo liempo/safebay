@@ -34,7 +34,10 @@ class AuthProfileFragment : Fragment() {
 
         val pref = requireActivity()
             .getPreferences(Context.MODE_PRIVATE)
-        binding.profile.setType(vm.getType(pref))
+        binding.profile.apply {
+            setType(vm.getType(pref))
+            phone = vm.currentUserPhone
+        }
         binding.progressBar.hide()
 
         // We gotta implement the image chooser here

@@ -24,6 +24,9 @@ class AuthViewModel : ViewModel() {
     private val currentUserId: String?
         get() = profiles.getCurrentUserId()
 
+    val currentUserPhone: String?
+        get() = profiles.getCurrentPhone()
+
     // Determines the state of the authentication
     private val _state = MutableLiveData<AuthState>()
     val state: LiveData<AuthState> = _state

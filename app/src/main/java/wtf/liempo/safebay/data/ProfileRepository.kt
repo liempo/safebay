@@ -53,6 +53,9 @@ class ProfileRepository {
         } catch (e: FirebaseException) { false }
     }
 
+    fun getCurrentPhone() = Firebase.auth
+        .currentUser?.phoneNumber
+
     fun signOut() = Firebase.auth.signOut()
 
 }
