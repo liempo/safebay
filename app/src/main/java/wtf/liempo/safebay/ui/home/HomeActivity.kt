@@ -3,7 +3,6 @@ package wtf.liempo.safebay.ui.home
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -43,11 +42,8 @@ class HomeActivity : AppCompatActivity() {
             Context.MODE_PRIVATE)
         type = vm.getType(pref)
 
-        // Set actionbar after init of type
-        setSupportActionBar(binding.bar)
-
         binding.fab.setOnClickListener {
-            vm.setPrimaryState()
+            vm.setPrimaryState(type)
         }
 
         binding.bar.setOnMenuItemClickListener {
@@ -57,8 +53,6 @@ class HomeActivity : AppCompatActivity() {
                     finish()
                 }
 
-                R.id.menu_manual -> vm.setState(
-                    HomeState.MANUAL)
                 R.id.menu_settings -> vm.setState(
                     HomeState.SETTINGS)
                 R.id.menu_logs -> vm.setState(
@@ -74,7 +68,9 @@ class HomeActivity : AppCompatActivity() {
             // Change fab icon based on state
             val drawable = ContextCompat.getDrawable(this,
                 if (it == HomeState.SCAN)
-                    R.drawable.ic_help_24
+                    if (type == Type.STANDARD)
+                        R.drawable.ic_help_24
+                    else R.drawable.ic_add_24
                 else R.drawable.ic_qr_24
             ); binding.fab.setImageDrawable(drawable)
 
@@ -101,16 +97,4 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Timber.d("Type: $type")
-        menu?.findItem(R.id.menu_manual)?.
-            isVisible = type == Type.BUSINESS
-        return super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_home_bar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 }

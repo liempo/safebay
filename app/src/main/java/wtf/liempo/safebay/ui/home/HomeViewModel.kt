@@ -52,11 +52,13 @@ class HomeViewModel : ViewModel() {
     /** This function will be called
      *  by the main button (fab),
      *  sets the primary state of Home */
-    fun setPrimaryState() {
+    fun setPrimaryState(type: Type) {
         _state.value = when (_state.value) {
             // Swap primary state only
-            HomeState.SCAN -> HomeState.HELP
-            HomeState.HELP -> HomeState.SCAN
+            HomeState.SCAN -> when (type) {
+                Type.STANDARD -> HomeState.HELP
+                Type.BUSINESS -> HomeState.MANUAL
+            }
 
             // If coming from any other state
             else -> HomeState.SCAN // default
