@@ -56,7 +56,7 @@ class HomeManualFragment : Fragment() {
 
         vm.logged.observe(viewLifecycleOwner, {
             if (it) {
-
+                binding.profile.clear()
                 binding.profile.setEditEnabled(true)
                 binding.buttonDone.isEnabled = true
                 binding.progressBar.hide()
