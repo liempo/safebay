@@ -40,6 +40,8 @@ class AuthLoginFragment : Fragment() {
         vm.state.observe(viewLifecycleOwner, {
             if (it == AuthState.LOGIN)
                 binding.buttons.visibility = View.VISIBLE
+            else if ( it == AuthState.FINISH)
+                binding.buttons.visibility = View.VISIBLE
         })
 
         binding.buttonStandardSignIn
