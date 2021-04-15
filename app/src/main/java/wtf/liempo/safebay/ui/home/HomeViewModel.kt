@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import wtf.liempo.safebay.data.*
+import wtf.liempo.safebay.repositories.*
 import wtf.liempo.safebay.models.*
 import wtf.liempo.safebay.utils.SingleLiveEvent
 

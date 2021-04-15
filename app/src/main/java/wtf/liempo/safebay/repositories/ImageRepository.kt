@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.data
+package wtf.liempo.safebay.repositories
 
 import android.net.Uri
 import com.google.firebase.FirebaseException

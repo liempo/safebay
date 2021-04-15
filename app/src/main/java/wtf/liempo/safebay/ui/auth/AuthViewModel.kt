@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import wtf.liempo.safebay.data.ImageRepository
+import wtf.liempo.safebay.repositories.ImageRepository
 import wtf.liempo.safebay.models.AuthState
 import wtf.liempo.safebay.models.Type
 import wtf.liempo.safebay.models.Profile
-import wtf.liempo.safebay.data.ProfileRepository
-import wtf.liempo.safebay.data.TypeRepository
+import wtf.liempo.safebay.repositories.ProfileRepository
+import wtf.liempo.safebay.repositories.TypeRepository
 
 class AuthViewModel : ViewModel() {
 

@@ -1,4 +1,4 @@
-package wtf.liempo.safebay.data
+package wtf.liempo.safebay.repositories
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

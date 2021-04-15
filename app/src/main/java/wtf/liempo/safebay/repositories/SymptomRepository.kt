@@ -1,9 +1,8 @@
-package wtf.liempo.safebay.data
+package wtf.liempo.safebay.repositories
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 import wtf.liempo.safebay.models.Symptom
 
 class SymptomRepository {
