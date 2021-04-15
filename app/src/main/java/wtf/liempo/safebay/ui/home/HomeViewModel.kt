@@ -10,6 +10,7 @@ import timber.log.Timber
 import wtf.liempo.safebay.repositories.*
 import wtf.liempo.safebay.models.*
 import wtf.liempo.safebay.utils.SingleLiveEvent
+import java.util.*
 
 class HomeViewModel : ViewModel() {
 
@@ -41,6 +42,7 @@ class HomeViewModel : ViewModel() {
 
     private val _listLogs = MutableLiveData<List<LogUnwrapped>>()
     val listLogs: LiveData<List<LogUnwrapped>> = _listLogs
+    private var listLogsCached = mutableListOf<LogUnwrapped>()
 
     private val _listSymptoms = MutableLiveData<List<Symptom>>()
     val listSymptoms: LiveData<List<Symptom>> = _listSymptoms
@@ -192,8 +194,28 @@ class HomeViewModel : ViewModel() {
 
                 // Notify observers
                 _listLogs.value = unwrappedList
+
+                // Cache original list
+                listLogsCached = unwrappedList
             }
         }
+    }
+
+    fun filterLogs(
+        start: Date? = null,
+        end: Date? = null
+    ) {
+        val filtered = mutableListOf<LogUnwrapped>()
+
+        for (log in listLogsCached) {
+            val isAfterStart = log.date.after(start)
+            val isBeforeEnd = log.date.before(end)
+
+            if (isAfterStart && isBeforeEnd)
+                filtered.add(log)
+        }
+
+        _listLogs.value = filtered
     }
 
     fun startSymptomsFetch() {

@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeLogsBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeLogsFragment : Fragment() {
@@ -19,6 +22,12 @@ class HomeLogsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: LogsAdapter
+
+    private val picker by lazy {
+        MaterialDatePicker.Builder
+            .dateRangePicker()
+            .build()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +43,9 @@ class HomeLogsFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(
+            view, savedInstanceState)
+
 
         adapter = LogsAdapter()
 
@@ -55,7 +66,32 @@ class HomeLogsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
 
-    }
+        picker.addOnNegativeButtonClickListener {
+            binding.buttonFilter.text =
+                getString(R.string.action_filter)
+            vm.startLogsFetch(type)
+        }
 
+        picker.addOnPositiveButtonClickListener {
+            // Convert to date object
+            val start = Date(it.first!!)
+            val end = Date(it.second!!)
+
+            // Format date
+            val format = SimpleDateFormat(
+                "MMM dd", Locale.getDefault())
+
+            binding.buttonFilter.text = getString(
+                R.string.format_date_range,
+                format.format(start),
+                format.format(end))
+
+            vm.filterLogs(start, end)
+        }
+
+        binding.buttonFilter.setOnClickListener {
+            picker.show(parentFragmentManager, picker.toString())
+        }
+    }
 
 }

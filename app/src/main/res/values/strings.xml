@@ -26,13 +26,14 @@
     <!-- HomeActivity -->
     <string name="title_logs">Trace Logs</string>
     <string name="title_logout">Logout</string>
-    <string name="title_manual">Manual</string>
     <string name="title_settings">Settings</string>
     <string name="action_edit">Edit</string>
     <string name="action_save">Save</string>
     <string name="action_done">Done</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_alert">Alert</string>
     <string name="msg_camera_denied">Camera permission not granted by the user.</string>
     <string name="msg_check_in">Do you want to check in?</string>
     <string name="msg_log_loading">Please wait, your information is being saved</string>
@@ -45,5 +46,7 @@
     <string name="msg_symptoms_low">You have a low chance of having COVID-19 virus right now. Please stay safe!</string>
     <string name="msg_symptoms_warning">You could be infected right now. To be sure, stay at home and contact medical help. Keep yourself healthy!</string>
     <string name="msg_symptoms_critical">Please contact health authorities and take precautions by isolating yourself.</string>
+    <string name="format_date_range">%s - %s</string>
+
 
 </resources>
