@@ -99,6 +99,10 @@ class ProfileView : ConstraintLayout {
     }
 
     fun clear() {
+        binding.imageProfile.
+            setImageResource(R.drawable.ic_person_24)
+        _imageUri = null; _phone = ""
+
         binding.inputName.setText("")
         binding.inputPhone.setText("")
         binding.inputAge.setText("")
