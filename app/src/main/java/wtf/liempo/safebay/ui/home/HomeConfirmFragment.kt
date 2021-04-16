@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeConfirmBinding
-import wtf.liempo.safebay.models.Profile
 
 class HomeConfirmFragment : DialogFragment() {
 
@@ -33,12 +32,8 @@ class HomeConfirmFragment : DialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Extract profile from args
-        val profile: Profile? = arguments?.
-            getParcelable("profile")
-
         // Update fields with profile
-        profile?.let {
+        vm.detected.value?.let { profile ->
             Glide.with(binding.root)
                 .load(profile.imageUri)
                 .into(binding.imageProfile)

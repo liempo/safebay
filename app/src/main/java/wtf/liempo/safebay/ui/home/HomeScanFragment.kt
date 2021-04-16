@@ -10,7 +10,6 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
@@ -53,8 +52,7 @@ class HomeScanFragment : Fragment() {
         vm.detected.observe(viewLifecycleOwner, {
             // Show Confirm dialog and pass profile
             findNavController().navigate(
-                R.id.action_confirm_scan,
-                bundleOf("profile" to it))
+                R.id.action_confirm_scan)
         })
 
         // Check camera permissions first
