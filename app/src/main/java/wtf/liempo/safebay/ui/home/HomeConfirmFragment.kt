@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.delay
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeConfirmBinding
 
@@ -65,6 +68,13 @@ class HomeConfirmFragment : DialogFragment() {
                 binding.progress.hide()
                 binding.textMessage.text = getString(
                     R.string.msg_log_done)
+
+                lifecycleScope.launchWhenResumed {
+                    delay(2500)
+
+                    findNavController().navigate(
+                        R.id.action_confirm_to_symptoms)
+                }
             }
         })
     }

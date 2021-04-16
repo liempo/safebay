@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeResultBinding
@@ -69,6 +70,8 @@ class HomeResultFragment : DialogFragment() {
                     R.string.msg_symptoms_critical)
             }
         }
+
+        binding.buttonConfirm.setOnClickListener { dismiss() }
 
         Timber.d("Text = ${binding.textMessage.text}")
     }

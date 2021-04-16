@@ -33,7 +33,11 @@
         android:id="@+id/dest_confirm"
         android:name="wtf.liempo.safebay.ui.home.HomeConfirmFragment"
         android:label="HomeConfirmFragment"
-        tools:layout="@layout/fragment_home_confirm"/>
+        tools:layout="@layout/fragment_home_confirm">
+        <action
+            android:id="@+id/action_confirm_to_symptoms"
+            app:destination="@id/dest_symptoms" />
+    </dialog>
 
     <fragment
         android:id="@+id/dest_settings"
@@ -85,7 +89,11 @@
 
     <action
         android:id="@+id/action_to_symptoms"
-        app:destination="@id/dest_symptoms" />
+        app:destination="@id/dest_symptoms" >
+        <argument
+            android:name="prompt_confirm"
+            android:defaultValue="false" />
+    </action>
     <fragment
         android:id="@+id/dest_manual"
         android:name="wtf.liempo.safebay.ui.home.HomeManualFragment"
