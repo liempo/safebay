@@ -46,7 +46,9 @@
     <string name="msg_symptoms_low">You have a low chance of having COVID-19 virus right now. Please stay safe!</string>
     <string name="msg_symptoms_warning">You could be infected right now. To be sure, stay at home and contact medical help. Keep yourself healthy!</string>
     <string name="msg_symptoms_critical">Please contact health authorities and take precautions by isolating yourself.</string>
-    <string name="format_date_range">%s - %s</string>
-
+    <string name="msg_alert_send_sms">Do you want to alert visitors from  this list for potential infections?</string>
+    <string name="title_alert">Send SMS Alert</string>
+    <string name="msg_alert">Someone suspected of carrying COVID-19 was in the same establishment as you. Please get yourself tested.\n\n</string>
+    <string name="msg_alert_sent">An SMS message has been sent to the shown list.</string>
 
 </resources>

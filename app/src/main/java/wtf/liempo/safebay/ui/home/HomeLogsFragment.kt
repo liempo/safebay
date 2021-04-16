@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.FragmentHomeLogsBinding
 import java.text.SimpleDateFormat
@@ -23,10 +24,14 @@ class HomeLogsFragment : Fragment() {
 
     private lateinit var adapter: LogsAdapter
 
+    // Format date
+    private var dateFilter: Date? = null
+    private val format = SimpleDateFormat(
+        "MMM dd", Locale.getDefault())
+
     private val picker by lazy {
         MaterialDatePicker.Builder
-            .dateRangePicker()
-            .build()
+            .datePicker().build()
     }
 
     override fun onCreateView(
@@ -45,7 +50,6 @@ class HomeLogsFragment : Fragment() {
     ) {
         super.onViewCreated(
             view, savedInstanceState)
-
 
         adapter = LogsAdapter()
 
@@ -74,23 +78,29 @@ class HomeLogsFragment : Fragment() {
 
         picker.addOnPositiveButtonClickListener {
             // Convert to date object
-            val start = Date(it.first!!)
-            val end = Date(it.second!!)
-
-            // Format date
-            val format = SimpleDateFormat(
-                "MMM dd", Locale.getDefault())
-
-            binding.buttonFilter.text = getString(
-                R.string.format_date_range,
-                format.format(start),
-                format.format(end))
-
-            vm.filterLogs(start, end)
+            dateFilter = Date(it!!)
+            binding.buttonFilter.text =
+                format.format(dateFilter!!)
+            vm.filterLogs(dateFilter!!)
         }
 
         binding.buttonFilter.setOnClickListener {
             picker.show(parentFragmentManager, picker.toString())
+        }
+
+        binding.buttonAlert.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.title_alert)
+                .setMessage(R.string.msg_alert_send_sms)
+                .setPositiveButton(R.string.action_alert) { d, _ ->
+                    vm.sendAlert(
+                        getString(R.string.msg_alert),
+                        getString(R.string.msg_alert_sent))
+                    d.dismiss()
+                }
+                .setNegativeButton(R.string.action_cancel) { d, _ ->
+                    d.dismiss()
+                }.show()
         }
     }
 

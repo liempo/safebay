@@ -5,12 +5,16 @@ import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+
 import timber.log.Timber
 import wtf.liempo.safebay.models.SMSRequest
 
 class TwilioService {
 
-    fun post(smsRequest: SMSRequest): String? {
+    suspend fun post(smsRequest: SMSRequest): String? {
         val client = OkHttpClient()
         val json = Gson().toJson(smsRequest)
 
@@ -22,10 +26,12 @@ class TwilioService {
             .build()
 
         return try {
-            client.newCall(request)
-                .execute()
-                .body()
-                .string()
+            withContext(Dispatchers.IO) {
+                client.newCall(request)
+                    .execute()
+                    .body()
+                    .string()
+            }
         } catch (e: Exception) {
             Timber.e(e, "Failed calling executing POST.")
             null

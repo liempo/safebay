@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomappbar.BottomAppBar.*
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import wtf.liempo.safebay.R
 import wtf.liempo.safebay.databinding.ActivityHomeBinding
@@ -61,6 +62,13 @@ class HomeActivity : AppCompatActivity() {
 
             true
         }
+
+        vm.notification.observe(this, {
+            Snackbar.make(
+                binding.root,
+                it, Snackbar.LENGTH_SHORT
+            ).show()
+        })
 
         vm.state.observe(this, {
             Timber.d("State: $it")

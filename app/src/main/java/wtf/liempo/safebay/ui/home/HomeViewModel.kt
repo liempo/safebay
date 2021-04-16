@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import wtf.liempo.safebay.repositories.*
@@ -20,6 +21,7 @@ class HomeViewModel : ViewModel() {
     private val logs = LogRepository()
     private val types = TypeRepository()
     private val symptoms = SymptomRepository()
+    private val alerts = AlertRepository()
 
     // Non-observable data, used internally
     val currentUserId: String?
@@ -46,6 +48,9 @@ class HomeViewModel : ViewModel() {
 
     private val _listSymptoms = MutableLiveData<List<Symptom>>()
     val listSymptoms: LiveData<List<Symptom>> = _listSymptoms
+
+    private val _notification = SingleLiveEvent<String>()
+    val notification: LiveData<String> = _notification
 
     // Will be used to notify UI that information is Logged
     private val _logged = MutableLiveData<Boolean>()
@@ -201,21 +206,46 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun filterLogs(
-        start: Date? = null,
-        end: Date? = null
-    ) {
+    fun filterLogs(date: Date) {
         val filtered = mutableListOf<LogUnwrapped>()
 
         for (log in listLogsCached) {
-            val isAfterStart = log.date.after(start)
-            val isBeforeEnd = log.date.before(end)
+            // Use calendar for checking
+            val c1 = Calendar.getInstance()
+                .apply { time = log.date }
+            val c2 = Calendar.getInstance()
+                .apply { time = date }
 
-            if (isAfterStart && isBeforeEnd)
-                filtered.add(log)
+            val isSameDay =
+                c1.get(Calendar.DAY_OF_YEAR) ==
+                c2.get(Calendar.DAY_OF_YEAR) &&
+                c1.get(Calendar.YEAR) ==
+                c2.get(Calendar.YEAR)
+            if (isSameDay) filtered.add(log)
         }
 
         _listLogs.value = filtered
+    }
+
+    private fun getPhoneList(): List<String> {
+        val phoneList = mutableSetOf<String>()
+
+        for (log in _listLogs.value!!)
+            log.profile.phone?.let {
+                phoneList.add(it)
+            }
+
+        Timber.d("Phone List: $phoneList")
+        return phoneList.toList()
+    }
+
+    fun sendAlert(msg: String, feedback: String) {
+        _notification.setValue(feedback)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val phoneList = getPhoneList()
+            alerts.sendAlert(phoneList, msg)
+        }
     }
 
     fun startSymptomsFetch() {
